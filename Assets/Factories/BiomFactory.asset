@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb75eb5f638d54419fe7ef2c5b73c81, type: 3}
+  m_Name: BiomFactory
+  m_EditorClassIdentifier: 
+  _oceanPrefab: {fileID: 7493211784872871173, guid: d42a4feb90c388241901df2b89040fe2, type: 3}
+  _beachPrefab: {fileID: 7541794852832623516, guid: 95fb78a8eee56d04b839064249a5326e, type: 3}
+  _plainsPrefab: {fileID: 4817819474298731283, guid: 7e2079202ff498940aca9eaad4289c9c, type: 3}
+  _forestPrefab: {fileID: 9054041348615906066, guid: 57c341ec2a04e364e96cf7af6e5ad37c, type: 3}
+  _mountainsPrefab: {fileID: 5033078238209885365, guid: e42ff041350df0046a09f109b2cdf47b, type: 3}
