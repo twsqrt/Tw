@@ -15,7 +15,11 @@ public class MoveApplyer : MonoBehaviour
     [SerializeField] private Player[] _players;
 
     [SerializeField] private List<PlayerMoveButton> _moveButtons;
+
     [SerializeField] private PlayersView _playersView;
+
+    private PlayerMoveBuilder _builderTest;
+    [SerializeField] private SetCoordinateBuilderPhase _buliderPhaseTest;
 
     private int _currentPlayerIndex;
     private Player _currentPlayer;
@@ -37,6 +41,10 @@ public class MoveApplyer : MonoBehaviour
         _playersView.Init(_players);
 
         _gameProcesses = new GameProcess[] { new ResourceExtractionProcess() };
+
+        _builderTest = new PlayerMoveBuilder();
+        _buliderPhaseTest.Init();
+        _builderTest.AddPhase(_buliderPhaseTest);
     }
 
     private void Update()
@@ -96,19 +104,7 @@ public class MoveApplyer : MonoBehaviour
             _currentMove = PlayerMove.Create(moveButton.MoveType, _currentPlayer);
 
         //template solution
-        if(_currentMove is CoordinatePlayerMove _currentCoordinateMove)
-        {
-            _currentMoveHighlite.ForEach(h => h.HighlightDisable());
-            _currentMoveHighlite.Clear();
-
-            foreach(MapTile tile in _map.Tiles)
-            {
-                if(_currentCoordinateMove.IsValidCoordinate(tile.PositionOnMap, _map))
-                    _currentMoveHighlite.Add(tile.Highlighter);
-            }
-
-            _currentMoveHighlite.ForEach(h => h.HighligthEnable());
-        }
+        _builderTest.StartBuilding(_currentMove);
     }
 
     private void OnPlacePlayerMoveSelected(PlacePlayerMoveButton placePlayerMoveButton)
