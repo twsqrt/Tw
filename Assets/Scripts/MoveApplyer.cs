@@ -48,7 +48,8 @@ public class MoveApplyer : MonoBehaviour
 
             if (tile != null && _currentMove != null)
             {
-                _currentMove.Coordinate = tile.PositionOnMap;
+                //template solution
+                (_currentMove as CoordinatePlayerMove).Coordinate = tile.PositionOnMap;
                 TryApplyPlayerMove();
             }
         }
@@ -94,10 +95,20 @@ public class MoveApplyer : MonoBehaviour
         else
             _currentMove = PlayerMove.Create(moveButton.MoveType, _currentPlayer);
 
+        //template solution
+        if(_currentMove is CoordinatePlayerMove _currentCoordinateMove)
+        {
+            _currentMoveHighlite.ForEach(h => h.HighlightDisable());
+            _currentMoveHighlite.Clear();
 
-        _currentMoveHighlite.ForEach(h => h.HighlightDisable());
-        _currentMoveHighlite = _currentMove.AllValidTiles(_map).Select(t => t.Highlighter).ToList();
-        _currentMoveHighlite.ForEach(h => h.HighligthEnable());
+            foreach(MapTile tile in _map.Tiles)
+            {
+                if(_currentCoordinateMove.IsValidCoordinate(tile.PositionOnMap, _map))
+                    _currentMoveHighlite.Add(tile.Highlighter);
+            }
+
+            _currentMoveHighlite.ForEach(h => h.HighligthEnable());
+        }
     }
 
     private void OnPlacePlayerMoveSelected(PlacePlayerMoveButton placePlayerMoveButton)

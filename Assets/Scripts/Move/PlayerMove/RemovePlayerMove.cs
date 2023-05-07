@@ -6,23 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class RemovePlayerMove : PlayerMove
+public class RemovePlayerMove : CoordinatePlayerMove
 {
     public override GameResources Cost => GameResources.zero;
 
     public RemovePlayerMove(Player player) : base(player) { }
 
-    public override IEnumerable<MapTile> AllValidTiles(Map map)
+    public override bool IsValidCoordinate(Vector2Int coordinates, Map map)
     {
-        IEnumerable<MapTile> validTiles = base.AllValidTiles(map);
+        //template soulution
+        if(map.Tiles.Where( t => t.Building != null && t.Building.Owner == Player).Count() < 2)
+            return false;
 
-        if (validTiles.Count() < 2) 
-            return Enumerable.Empty<MapTile>();
-
-        return validTiles;
-    }
-    protected override bool IsValidCoordinate(Vector2Int coordinates, Map map)
-    {
         MapTile tile = map[coordinates];
 
         return tile != null && tile.Building != null && tile.Building.Owner == _player;

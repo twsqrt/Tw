@@ -8,7 +8,6 @@ using UnityEngine;
 public abstract class PlayerMove : Move
 {
     protected Player _player;
-    public Vector2Int Coordinate;
     public Player Player => _player;
 
     public PlayerMove(Player player)
@@ -37,24 +36,6 @@ public abstract class PlayerMove : Move
                 return new ArtilleryPlayerMove(player);
             default:
                 throw new NotImplementedException();
-        }
-    }
-
-    protected abstract bool IsValidCoordinate(Vector2Int coordinate, Map map);
-
-    public override bool IsValidMove(Map map)
-    {
-        return IsValidCoordinate(Coordinate, map);
-    }
-
-    public virtual IEnumerable<MapTile> AllValidTiles(Map map)
-    {
-        IEnumerable<MapTile> tiles = map.Tiles;
-
-        foreach(MapTile tile in tiles )
-        {
-            if (IsValidCoordinate(tile.PositionOnMap, map))
-                yield return tile;
         }
     }
 }

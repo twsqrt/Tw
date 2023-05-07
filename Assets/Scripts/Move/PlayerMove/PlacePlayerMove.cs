@@ -7,16 +7,16 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class PlacePlayerMove : PlayerMove
+public class PlacePlayerMove : CoordinatePlayerMove, IBuildingMove
 {
-    public MapTileBuildingType BuildingType;
-    public MapTileBuildingFactory BuildingFactory;
+    public MapTileBuildingType BuildingType { get; set; }
+    public MapTileBuildingFactory BuildingFactory { get; set; }
 
     public override GameResources Cost => GameResources.zero;
 
     public PlacePlayerMove(Player player) : base(player) { }
 
-    protected override bool IsValidCoordinate(Vector2Int coordinate, Map map)
+    public override bool IsValidCoordinate(Vector2Int coordinate, Map map)
     {
         MapTile tile = map[coordinate];
 

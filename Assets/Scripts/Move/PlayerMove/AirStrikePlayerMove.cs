@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class AirStrikePlayerMove : PlayerMove
+public class AirStrikePlayerMove : CoordinatePlayerMove
 {
     public override GameResources Cost => new GameResources(5, 2, 2);
 
     public AirStrikePlayerMove(Player player) : base(player) { }
 
-    protected override bool IsValidCoordinate(Vector2Int coordinate, Map map)
+    public override bool IsValidCoordinate(Vector2Int coordinate, Map map)
     {
         MapTile tile = map[coordinate];
 

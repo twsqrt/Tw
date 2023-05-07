@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class NavalAttackPlayerMove : PlayerMove
+public class NavalAttackPlayerMove : CoordinatePlayerMove
 {
     public override GameResources Cost => new GameResources(1, 2, 3);
 
-    public NavalAttackPlayerMove(Player player) : base(player) { }
+    public NavalAttackPlayerMove(Player player) : base(player) {}
 
-    protected override bool IsValidCoordinate(Vector2Int coordinate, Map map)
+    public override bool IsValidCoordinate(Vector2Int coordinate, Map map)
     {
         MapTile tile = map[coordinate];
 

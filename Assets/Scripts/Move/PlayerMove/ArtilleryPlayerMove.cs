@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ArtilleryPlayerMove : PlayerMove
+public class ArtilleryPlayerMove : CoordinatePlayerMove
 {
     public override GameResources Cost => new GameResources(5, 7, 5);
 
     public ArtilleryPlayerMove(Player player) : base(player) { }
-    protected override bool IsValidCoordinate(Vector2Int coordinate, Map map)
+    public override bool IsValidCoordinate(Vector2Int coordinate, Map map)
     {
         MapTile tile = map[coordinate];
         return tile != null && tile.Building != null && tile.Building.Owner != _player;
