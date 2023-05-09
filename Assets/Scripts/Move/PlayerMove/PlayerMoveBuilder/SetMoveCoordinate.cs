@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SetCoordinateBuilderPhase : PlayerMoveBuilderPhase
+public class SetMoveCoordinate : PlayerMoveBuilderState
 {
     [SerializeField] private Map _map;
     [SerializeField] private Camera _camera;
@@ -9,26 +9,21 @@ public class SetCoordinateBuilderPhase : PlayerMoveBuilderPhase
     private PlayerMoveHighlighter _moveHighlighter;
     private ICoordinateMove _coordinateMove;
 
-    public void Init()
-    {
-        _moveHighlighter = new PlayerMoveHighlighter(_map);
-    }
-
-    public override void SetMove(PlayerMove move)
+    protected override void AfterEnter(PlayerMove move)
     {
         if(move is ICoordinateMove coordinateMove)
         {
+            //template solution
+            if(_moveHighlighter == null)
+                _moveHighlighter = new PlayerMoveHighlighter(_map);
+
             _coordinateMove = coordinateMove;
+            _moveHighlighter.HighlightMove(coordinateMove);
         }
         else
         {
             throw new ArgumentException();
         }
-    }
-
-    protected override void AfterStart()
-    {
-        _moveHighlighter.HighlightMove(_coordinateMove);
     }
 
     private void Update()
@@ -38,13 +33,12 @@ public class SetCoordinateBuilderPhase : PlayerMoveBuilderPhase
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             MapTile tile = _map.GetTile(ray);
 
-            if (tile != null)
+            if (tile != null && _coordinateMove.IsValidCoordinate(tile.PositionOnMap, _map))
             {
                 _coordinateMove.Coordinate = tile.PositionOnMap;
 
                 _moveHighlighter.HighlightDisable();
-                this.gameObject.SetActive(false);
-                PhaseIsCompleted?.Invoke();
+                Exit();
             }
         }
     }

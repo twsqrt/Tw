@@ -6,14 +6,14 @@ using UnityEngine.EventSystems;
 
 public class PlayerMoveButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] protected PlayerMoveType _moveType;
+    [SerializeField] private PlayerMoveType _moveType;
 
     public PlayerMoveType MoveType => _moveType;
 
-    public Action<PlayerMoveButton> OnButtonClick;
+    public event Action<PlayerMoveType> OnButtonClick;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnButtonClick?.Invoke(this);
+        OnButtonClick?.Invoke(_moveType);
     }
 }

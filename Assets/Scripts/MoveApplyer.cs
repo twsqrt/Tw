@@ -13,78 +13,36 @@ public class MoveApplyer : MonoBehaviour
     [SerializeField] private MapTileBuildingFactory _buildingFactory;
     [SerializeField] private MapTileBiomFactory _biomFactory;
     [SerializeField] private Player[] _players;
-
-    [SerializeField] private List<PlayerMoveButton> _moveButtons;
-
     [SerializeField] private PlayersView _playersView;
-
-    private PlayerMoveBuilder _builderTest;
-    [SerializeField] private SetCoordinateBuilderPhase _buliderPhaseTest;
+    [SerializeField] private PlayerMoveBuilder _playerMoveBuilder;
 
     private int _currentPlayerIndex;
-    private Player _currentPlayer;
-    private PlayerMove _currentMove;
-
-    private List<Highlighter> _currentMoveHighlite;
-
     private GameProcess[] _gameProcesses; 
 
     private void Start()
     {
         _map.Init(_biomFactory, _buildingFactory, _players);
-        _moveButtons.ForEach(b => b.OnButtonClick += OnMoveSelected);
 
         _currentPlayerIndex = 0;
-        _currentPlayer = _players[_currentPlayerIndex];
+        _playerMoveBuilder.Init();
+        _playerMoveBuilder.Player = _players[_currentPlayerIndex];
+        _playerMoveBuilder.AddListener(OnPlayerMoveCreated);
 
-        _currentMoveHighlite = new List<Highlighter>();
         _playersView.Init(_players);
 
         _gameProcesses = new GameProcess[] { new ResourceExtractionProcess() };
 
-        _builderTest = new PlayerMoveBuilder();
-        _buliderPhaseTest.Init();
-        _builderTest.AddPhase(_buliderPhaseTest);
     }
 
-    private void Update()
+    public bool TryApplyPlayerMove(PlayerMove move)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            MapTile tile = _map.GetTile(ray);
-
-            if (tile != null && _currentMove != null)
-            {
-                //template solution
-                (_currentMove as CoordinatePlayerMove).Coordinate = tile.PositionOnMap;
-                TryApplyPlayerMove();
-            }
-        }
-    }
-
-
-    public bool TryApplyPlayerMove()
-    {
-        GameResources moveCost = _currentMove.Cost;
-        if (_currentPlayer.Resources.IsEnough(moveCost) == false ||
-            _currentMove.TryExecute(_map) == false)
+        GameResources moveCost = move.Cost;
+        if (move.Player.Resources.IsEnough(moveCost) == false ||
+            move.TryExecute(_map) == false)
             return false;
 
-        _currentPlayer.Resources -= moveCost;
-
-        _currentMove = null;
-        _currentMoveHighlite.ForEach(h => h.HighlightDisable());
-        _currentMoveHighlite.Clear();
-
-        _currentPlayerIndex++;
-        if(_currentPlayerIndex == _players.Count())
-        {
-            _currentPlayerIndex = 0;
-            ApplyGameProcesses();
-        }
-
-        _currentPlayer = _players[_currentPlayerIndex];
+        move.Player.Resources -= moveCost;
+        ApplyGameProcesses();
         return true;
     }
 
@@ -96,23 +54,12 @@ public class MoveApplyer : MonoBehaviour
         }
     }
 
-    private void OnMoveSelected(PlayerMoveButton moveButton)
+    public void OnPlayerMoveCreated(PlayerMove move)
     {
-        if (moveButton is PlacePlayerMoveButton placePlayerMoveButton)
-            OnPlacePlayerMoveSelected(placePlayerMoveButton);
-        else
-            _currentMove = PlayerMove.Create(moveButton.MoveType, _currentPlayer);
-
         //template solution
-        _builderTest.StartBuilding(_currentMove);
-    }
+        TryApplyPlayerMove(move);
 
-    private void OnPlacePlayerMoveSelected(PlacePlayerMoveButton placePlayerMoveButton)
-    {
-        PlacePlayerMove placeMove = PlayerMove.Create(PlayerMoveType.Place, _currentPlayer) as PlacePlayerMove;
-        placeMove.BuildingType = placePlayerMoveButton.BuildingType;
-        placeMove.BuildingFactory = _buildingFactory;
-
-        _currentMove = placeMove;
+        _currentPlayerIndex = (_currentPlayerIndex + 1 ) % _players.Count();
+        _playerMoveBuilder.Player = _players[_currentPlayerIndex];
     }
 }

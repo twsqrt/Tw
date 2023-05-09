@@ -1,48 +1,37 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveBuilder
+public class PlayerMoveBuilder : MonoBehaviour 
 {
-    private List<PlayerMoveBuilderPhase> _phases;
-    private int _currentPhaseIndex;
-    private PlayerMove _currentMove;
+    [SerializeField] private PlayerMoveBuilderTransition[] _transition;
+    [SerializeField] private BuilderFinalState _finalState;
+    [SerializeField] private PlayerMoveButton[] _buttons;
 
-    public Action<PlayerMove> BuildingIsCompleted;
+    //template solution
+    public Player Player;
 
-
-    public PlayerMoveBuilder()
+    public void Init()
     {
-        _phases = new List<PlayerMoveBuilderPhase>();
-    }
-
-    public void AddPhase(PlayerMoveBuilderPhase phase)
-    {
-        phase.PhaseIsCompleted += OnPhaseCompletion;
-        _phases.Add(phase);
-    }
-
-    public void StartBuilding(PlayerMove move)
-    {
-        _phases.ForEach(p => p.SetMove(move));
-        _currentMove = move;
-        _currentPhaseIndex = 0;
-
-        _phases[_currentPhaseIndex].StartPhase();
-    }
-
-    private void OnPhaseCompletion()
-    {
-        _currentPhaseIndex++;
-        if(_currentPhaseIndex == _phases.Count)
+        foreach(PlayerMoveButton button in _buttons)
         {
-            _currentPhaseIndex = 0;
-            BuildingIsCompleted?.Invoke(_currentMove);
+            button.OnButtonClick += StartBuilding;
         }
-        else
+    } 
+
+
+    public void AddListener(Action<PlayerMove> action)
+    {
+        _finalState.IsEntered += action;
+    }
+
+    public void StartBuilding(PlayerMoveType moveType)
+    {
+        PlayerMove move = PlayerMove.Create(moveType, Player);
+
+        foreach(var transition in _transition )
         {
-            _phases[_currentPhaseIndex].StartPhase();
+            if(transition.TryEnterNext(move, moveType))
+                return;
         }
     }
-
 }
