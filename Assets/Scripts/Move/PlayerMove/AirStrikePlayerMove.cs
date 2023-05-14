@@ -5,25 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class AirStrikePlayerMove : CoordinatePlayerMove
+public class AirStrikePlayerMove : PlayerMove, ICoordinateMove
 {
+    public Vector2Int Coordinates {get; set;}
     public override GameResources Cost => new GameResources(5, 2, 2);
 
-    public AirStrikePlayerMove(Player player) : base(player) { }
+    public AirStrikePlayerMove(Player player) : base(player, MoveParameters.Coordinate) { }
 
-    public override bool IsValidCoordinate(Vector2Int coordinate, Map map)
+    public override bool IsValidMove(Map map)
     {
-        MapTile tile = map[coordinate];
+        MapTile tile = map[Coordinates];
 
         if (tile == null || tile.Building == null || tile.Building.Owner == _player)
             return false;
 
-        IEnumerable<MapTile> tileVicinityRadius1 = map.GetVicinity(coordinate, 1);
+        IEnumerable<MapTile> tileVicinityRadius1 = map.GetVicinity(Coordinates, 1);
 
         return tileVicinityRadius1.Any(t => t.Biom.IsAirBarrier) == false;
     }
     public override void Execute(Map map)
     {
-        map[Coordinate].Building = null;
+        map[Coordinates].Building = null;
     }
 }

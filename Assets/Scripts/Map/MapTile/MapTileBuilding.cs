@@ -32,12 +32,3 @@ public class MapTileBuilding : MonoBehaviour
         _factory.DestroyBuliding(this);
     }
 }
-
-[Serializable]
-public enum MapTileBuildingType
-{
-    Settlement,
-    Pier,
-    Airport,
-    Artillery
-}

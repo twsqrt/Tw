@@ -21,7 +21,7 @@ public class MapTileBuildingFactory : ScriptableObject
             case MapTileBuildingType.Settlement:
                 selectedPrefab = _cettlementPrefab;
                 break;
-            case MapTileBuildingType.Pier:
+            case MapTileBuildingType.NavalBase:
                 selectedPrefab = _pierPrefab;
                 break;
             case MapTileBuildingType.Airport:
@@ -47,4 +47,12 @@ public class MapTileBuildingFactory : ScriptableObject
     {
         Destroy(content.gameObject);
     }
+}
+
+public enum MapTileBuildingType
+{
+    Settlement,
+    NavalBase,
+    Airport,
+    Artillery
 }

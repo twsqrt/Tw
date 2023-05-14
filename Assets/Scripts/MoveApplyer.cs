@@ -26,7 +26,7 @@ public class MoveApplyer : MonoBehaviour
         _currentPlayerIndex = 0;
         _playerMoveBuilder.Init();
         _playerMoveBuilder.Player = _players[_currentPlayerIndex];
-        _playerMoveBuilder.AddListener(OnPlayerMoveCreated);
+        _playerMoveBuilder.OnMoveBuilt += OnPlayerMoveCreated;
 
         _playersView.Init(_players);
 

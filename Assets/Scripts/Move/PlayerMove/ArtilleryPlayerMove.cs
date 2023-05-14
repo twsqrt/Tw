@@ -5,18 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ArtilleryPlayerMove : CoordinatePlayerMove
+public class ArtilleryPlayerMove : PlayerMove, ICoordinateMove
 {
-    public override GameResources Cost => new GameResources(5, 7, 5);
+    public Vector2Int Coordinates { get; set; }
+    public override GameResources Cost => new GameResources(6, 7, 5);
 
-    public ArtilleryPlayerMove(Player player) : base(player) { }
-    public override bool IsValidCoordinate(Vector2Int coordinate, Map map)
+    public ArtilleryPlayerMove(Player player) : base(player, MoveParameters.Coordinate) { }
+
+    public override bool IsValidMove(Map map)
     {
-        MapTile tile = map[coordinate];
+        MapTile tile = map[Coordinates];
         return tile != null && tile.Building != null && tile.Building.Owner != _player;
     }
     public override void Execute(Map map)
     {
-        map[Coordinate].Building = null;
+        map[Coordinates].Building = null;
     }
 }

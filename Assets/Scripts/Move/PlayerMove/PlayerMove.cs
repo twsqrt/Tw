@@ -5,14 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public abstract class PlayerMove : Move
+public abstract class PlayerMove : IMove
 {
     protected Player _player;
     public Player Player => _player;
 
-    public PlayerMove(Player player)
+    private MoveParameters _parameters;
+
+    public PlayerMove(Player player, MoveParameters parameters)
     {
         _player = player;
+        _parameters = parameters;
+    }
+    public bool IsParameterizedBy(MoveParameters parameter)
+    {
+        return (_parameters & parameter) != 0;
     }
 
     public abstract GameResources Cost
@@ -20,30 +27,7 @@ public abstract class PlayerMove : Move
         get;
     }
 
-    public static PlayerMove Create(PlayerMoveType type, Player player)
-    {
-        switch(type)
-        {
-            case PlayerMoveType.Place:
-                return new PlacePlayerMove(player);
-            case PlayerMoveType.Remove:
-                return new RemovePlayerMove(player);
-            case PlayerMoveType.NavalAttack:
-                return new NavalAttackPlayerMove(player);
-            case PlayerMoveType.AirStrike:
-                return new AirStrikePlayerMove(player);
-            case PlayerMoveType.Artillery:
-                return new ArtilleryPlayerMove(player);
-            default:
-                throw new NotImplementedException();
-        }
-    }
-}
-public enum PlayerMoveType
-{
-    Place,
-    Remove,
-    NavalAttack,
-    AirStrike,
-    Artillery
+    public abstract void Execute(Map map); 
+
+    public abstract bool IsValidMove(Map map); 
 }

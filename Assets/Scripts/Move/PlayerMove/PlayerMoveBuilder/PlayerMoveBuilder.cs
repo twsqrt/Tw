@@ -1,37 +1,88 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMoveBuilder : MonoBehaviour 
 {
-    [SerializeField] private PlayerMoveBuilderTransition[] _transition;
-    [SerializeField] private BuilderFinalState _finalState;
-    [SerializeField] private PlayerMoveButton[] _buttons;
+    [SerializeField] private PlayerMoveButton[] _moveButtons;
+
+    [SerializeField] private MoveBuildingSelector _buildingSelector;
+    [SerializeField] private MoveCoordinateSelector _coordinateSelector;
+
+    public event Action<PlayerMove> OnMoveBuilt;
+
+    private bool _buildingProcessEnable;
+    private CancellationTokenSource _buildingCancellation;
+
 
     //template solution
     public Player Player;
 
     public void Init()
     {
-        foreach(PlayerMoveButton button in _buttons)
+        foreach(PlayerMoveButton button in _moveButtons)
         {
-            button.OnButtonClick += StartBuilding;
+            button.OnButtonClick += TryBuild;
         }
+
+        _buildingSelector.Init();
+        _coordinateSelector.Init();
+
+        _buildingProcessEnable = false;
     } 
 
-
-    public void AddListener(Action<PlayerMove> action)
+    public void BuildingCancelHandler()
     {
-        _finalState.IsEntered += action;
+        _buildingCancellation.Cancel();
     }
 
-    public void StartBuilding(PlayerMoveType moveType)
+    public async void TryBuild(PlayerMoveType moveType)
     {
-        PlayerMove move = PlayerMove.Create(moveType, Player);
+        if(_buildingProcessEnable)
+            return;
 
-        foreach(var transition in _transition )
+        _buildingProcessEnable = true;
+        PlayerMove move = PlayerMoveFactory.Create(moveType, Player);
+
+        _buildingCancellation?.Cancel();
+        _buildingCancellation?.Dispose();
+        _buildingCancellation = new CancellationTokenSource();
+
+        try
         {
-            if(transition.TryEnterNext(move, moveType))
-                return;
+            if(await BuildingProcess(move, _buildingCancellation.Token))
+            {
+                OnMoveBuilt?.Invoke(move);
+            }
         }
+        catch(TaskCanceledException) {}
+        finally
+        {
+            _buildingProcessEnable = false;
+        }
+    }
+
+    private async Task<bool> BuildingProcess(PlayerMove move, CancellationToken token)
+    {
+        if(move.IsParameterizedBy(MoveParameters.Building))
+        {
+            await _buildingSelector.StartSelectingAsync(move as IBuildingMove, token);
+
+            if(token.IsCancellationRequested)
+                return false;
+        }
+
+
+        if(move.IsParameterizedBy(MoveParameters.Coordinate))
+        {
+            await _coordinateSelector.StartSelectingAsync(move as ICoordinateMove, token);
+
+            if(token.IsCancellationRequested)
+                return false;
+        }
+        
+        return true;
     }
 }

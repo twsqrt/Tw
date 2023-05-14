@@ -7,18 +7,19 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class PlacePlayerMove : CoordinatePlayerMove, IBuildingMove
+public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
 {
+    public Vector2Int Coordinates { get; set; }
     public MapTileBuildingType BuildingType { get; set; }
     public MapTileBuildingFactory BuildingFactory { get; set; }
 
     public override GameResources Cost => GameResources.zero;
 
-    public PlacePlayerMove(Player player) : base(player) { }
+    public PlacePlayerMove(Player player) : base(player, MoveParameters.Coordinate | MoveParameters.Building) { }
 
-    public override bool IsValidCoordinate(Vector2Int coordinate, Map map)
+    public override bool IsValidMove(Map map)
     {
-        MapTile tile = map[coordinate];
+        MapTile tile = map[Coordinates];
 
         if (tile == null || tile.Building != null || tile.Biom.CanPlaceBulidingsOn == false) return false;
 
@@ -31,9 +32,8 @@ public class PlacePlayerMove : CoordinatePlayerMove, IBuildingMove
 
     public override void Execute(Map map)
     {
-        MapTile tile = map[Coordinate];
+        MapTile tile = map[Coordinates];
 
         tile.Building = BuildingFactory.Create(BuildingType, _player);
     }
-
 }
