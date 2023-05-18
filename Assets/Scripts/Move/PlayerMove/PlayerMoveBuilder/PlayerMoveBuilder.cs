@@ -10,6 +10,7 @@ public class PlayerMoveBuilder : MonoBehaviour
     [SerializeField] private MoveBuildingSelector _buildingSelector;
     [SerializeField] private MoveCoordinateSelector _coordinateSelector;
     [SerializeField] private MoveResourcesSelector _resourceSelector;
+    [SerializeField] private MoveTimeSelector _timeSelector;
 
     public event Action<PlayerMove> OnMoveBuilt;
 
@@ -30,6 +31,7 @@ public class PlayerMoveBuilder : MonoBehaviour
         _buildingSelector.Init();
         _coordinateSelector.Init();
         _resourceSelector.Init();
+        _timeSelector.Init();
 
         _buildingProcessEnable = false;
     } 
@@ -80,6 +82,11 @@ public class PlayerMoveBuilder : MonoBehaviour
         if(move.IsParameterizedBy(MoveParameters.Resources))
         {
             await _resourceSelector.StartSelectingAsync(move as IResoucesMove, token);
+        }
+
+        if(move.IsParameterizedBy(MoveParameters.Time))
+        {
+            await _timeSelector.StartSelectingAsync(move as ITimeMove, token);
         }
 
         return token.IsCancellationRequested == false;
