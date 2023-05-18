@@ -139,9 +139,9 @@ MonoBehaviour:
   _canPlaceBulidingsOn: 0
   _isAirBarrier: 1
   _resources:
-    Resource1: 2
-    Resource2: 10
-    Resource3: 1
+    Wood: 3
+    Coal: 2
+    Oil: 1
 --- !u!1001 &1057351233810600773
 PrefabInstance:
   m_ObjectHideFlags: 0

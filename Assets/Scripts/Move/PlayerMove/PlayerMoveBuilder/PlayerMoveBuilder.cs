@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class PlayerMoveBuilder : MonoBehaviour 
 {
     [SerializeField] private PlayerMoveButton[] _moveButtons;
-
     [SerializeField] private MoveBuildingSelector _buildingSelector;
     [SerializeField] private MoveCoordinateSelector _coordinateSelector;
+    [SerializeField] private MoveResourcesSelector _resourceSelector;
 
     public event Action<PlayerMove> OnMoveBuilt;
 
@@ -29,6 +29,7 @@ public class PlayerMoveBuilder : MonoBehaviour
 
         _buildingSelector.Init();
         _coordinateSelector.Init();
+        _resourceSelector.Init();
 
         _buildingProcessEnable = false;
     } 
@@ -69,20 +70,18 @@ public class PlayerMoveBuilder : MonoBehaviour
         if(move.IsParameterizedBy(MoveParameters.Building))
         {
             await _buildingSelector.StartSelectingAsync(move as IBuildingMove, token);
-
-            if(token.IsCancellationRequested)
-                return false;
         }
-
 
         if(move.IsParameterizedBy(MoveParameters.Coordinate))
         {
             await _coordinateSelector.StartSelectingAsync(move as ICoordinateMove, token);
-
-            if(token.IsCancellationRequested)
-                return false;
         }
-        
-        return true;
+
+        if(move.IsParameterizedBy(MoveParameters.Resources))
+        {
+            await _resourceSelector.StartSelectingAsync(move as IResoucesMove, token);
+        }
+
+        return token.IsCancellationRequested == false;
     }
 }

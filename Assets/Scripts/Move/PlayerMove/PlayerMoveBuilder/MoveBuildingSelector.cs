@@ -7,33 +7,26 @@ public class MoveBuildingSelector : ParameterSelector<IBuildingMove>
     [SerializeField] private BuildingButton[] _buttons;
 
     private IBuildingMove _buildingMove;
-    
-    private void OnEnable()
+
+    public override void Init()
     {
+        gameObject.SetActive(false);
         foreach(BuildingButton button in _buttons)
         {
             button.OnButtonClick += BuildingButtonHandler;
         }
     }
 
-    private void OnDisable()
-    {
-        foreach(BuildingButton button in _buttons)
-        {
-            button.OnButtonClick -= BuildingButtonHandler;
-        }
-    }
-
     protected override void AfterStart(IBuildingMove buildingMove)
     {
-        this.gameObject.SetActive(true);
+        gameObject.SetActive(true);
         _buildingMove = buildingMove;
         _buildingMove.BuildingFactory = _buildingFactory;
     }
 
     protected override void BeforeExit()
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void BuildingButtonHandler(MapTileBuildingType buildingType)

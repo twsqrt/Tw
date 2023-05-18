@@ -18,11 +18,14 @@ public abstract class ParameterSelector<T> : MonoBehaviour where T : IMove
 
     public async Task StartSelectingAsync(T parameter, CancellationToken token)
     {
+        if(token.IsCancellationRequested)
+            return;
+
         var tcs = new TaskCompletionSource<object>();
         Action handler = () => tcs.TrySetResult(null);
 
         token.Register( () => tcs.TrySetCanceled());
-        token.Register( () => Exit() );
+        token.Register( () => Exit());
 
         try
         {

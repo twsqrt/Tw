@@ -49,9 +49,9 @@ MonoBehaviour:
   _canPlaceBulidingsOn: 1
   _isAirBarrier: 0
   _resources:
-    Resource1: 3
-    Resource2: 3
-    Resource3: 3
+    Wood: 1
+    Coal: 2
+    Oil: 3
 --- !u!1 &5745852114326407658
 GameObject:
   m_ObjectHideFlags: 0

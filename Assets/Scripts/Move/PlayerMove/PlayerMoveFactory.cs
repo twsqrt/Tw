@@ -16,6 +16,8 @@ public static class PlayerMoveFactory
                 return new AirStrikePlayerMove(player);
             case PlayerMoveType.Artillery:
                 return new ArtilleryPlayerMove(player);
+            case PlayerMoveType.TimeTravel:
+                return new TimeTravelPlayerMove(player);
             default:
                 throw new NotImplementedException();
         }
@@ -28,5 +30,7 @@ public enum PlayerMoveType
     Remove,
     NavalAttack,
     AirStrike,
-    Artillery
+    Artillery,
+    TimeTravel
+
 }

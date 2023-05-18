@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class ContentTypeButton<T> : MonoBehaviour, IPointerClickHandler where T : struct, IConvertible
+public abstract class ValueButton<T> : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private T _type;
+    [SerializeField] private T _value;
 
     public event Action<T> OnButtonClick;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnButtonClick?.Invoke(_type);
+        OnButtonClick?.Invoke(_value);
     }
 }

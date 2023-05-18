@@ -146,6 +146,6 @@ MonoBehaviour:
   _canPlaceBulidingsOn: 1
   _isAirBarrier: 0
   _resources:
-    Resource1: 5
-    Resource2: 1
-    Resource3: 0
+    Wood: 2
+    Coal: 1
+    Oil: 2
