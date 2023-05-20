@@ -28,7 +28,7 @@ public class RemovePlayerMove : PlayerMove, ICoordinateMove
     {
         MapTile tile = map[Coordinates];
 
-        GameResources buildingCost = tile.Building.Cost;
+        GameResources buildingCost = tile.Building.Info.Cost;
 
         _player.Resources += buildingCost * 0.5f;
 

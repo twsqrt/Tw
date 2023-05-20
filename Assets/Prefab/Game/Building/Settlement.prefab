@@ -45,15 +45,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5651933190465151018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c5999ab5361b24281669b0b86bfc0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f5d93a41a809454cb5b1840cceece4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
-  _cost:
-    Resource1: 0
-    Resource2: 0
-    Resource3: 0
-  _colorSeter: {fileID: -2636172532934305611}
+  _colorSetter: {fileID: -2636172532934305611}
 --- !u!114 &-2636172532934305611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +58,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5651933190465151018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb90be3ea9141c7428c77bdbccbc300f, type: 3}
+  m_Script: {fileID: 11500000, guid: 61be7cdf17ae76d4f8fabea0a71a4cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2968666118389091109

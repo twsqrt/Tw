@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MoveBuildingSelector : ParameterSelector<IBuildingMove>
 {
-    [SerializeField] private MapTileBuildingFactory _buildingFactory;
+    [SerializeField] private BuildingFactory _buildingFactory;
     [SerializeField] private BuildingButton[] _buttons;
 
     private IBuildingMove _buildingMove;
@@ -13,6 +13,7 @@ public class MoveBuildingSelector : ParameterSelector<IBuildingMove>
         gameObject.SetActive(false);
         foreach(BuildingButton button in _buttons)
         {
+            button.Init();
             button.OnButtonClick += BuildingButtonHandler;
         }
     }
@@ -29,9 +30,9 @@ public class MoveBuildingSelector : ParameterSelector<IBuildingMove>
         gameObject.SetActive(false);
     }
 
-    private void BuildingButtonHandler(MapTileBuildingType buildingType)
+    private void BuildingButtonHandler(BuildingInfo buildingInfo)
     {
-        _buildingMove.BuildingType = buildingType;
+        _buildingMove.BuildingInfo = buildingInfo;
         Exit();
     }
 }

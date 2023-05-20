@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4281239b2b00e2f4ba49e452680a6f0c, type: 3}
-  m_Name: BuildingFactory
+  m_Script: {fileID: 11500000, guid: 7b1b56ffdb87a6449ad5e38fd8ae94ad, type: 3}
+  m_Name: Settlement
   m_EditorClassIdentifier: 
-  _cettlementPrefab: {fileID: 6297561334107459734, guid: d00d0c5dd2478a54abce3c2e897597ff, type: 3}
-  _pierPrefab: {fileID: 0}
-  _airportPrefab: {fileID: 0}
-  _artilleryPrefab: {fileID: 0}
+  _name: Settlement
+  _cost:
+    Wood: 20
+    Coal: 10
+    Oil: 2
+  _prefab: {fileID: 6297561334107459734, guid: d00d0c5dd2478a54abce3c2e897597ff, type: 3}
+  _isMinesResources: 1

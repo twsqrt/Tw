@@ -57,7 +57,7 @@ public class Map : MonoBehaviour
         return (BiomType)(5 * Mathf.Clamp(f, 0f, 0.99f));
     }
 
-    public void Init(BiomFactory biomFactory, MapTileBuildingFactory buildingFactory, Player[] players)
+    public void Init(BiomFactory biomFactory)
     {
         _quadCollider.transform.localScale = new Vector3(_width, _height, 1f);
 
@@ -82,10 +82,6 @@ public class Map : MonoBehaviour
                 this[i, j] = newTile;
             }
         }
-
-        this[4, 0].Building = buildingFactory.Create(MapTileBuildingType.Settlement, players[0]);
-        this[_width - 3, _height - 1].Building = buildingFactory.Create(MapTileBuildingType.Settlement, players[1]);
-
     }
 
     public MapTile GetTile(Ray ray)

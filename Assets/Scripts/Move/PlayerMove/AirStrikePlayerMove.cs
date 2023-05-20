@@ -21,7 +21,7 @@ public class AirStrikePlayerMove : PlayerMove, ICoordinateMove
 
         IEnumerable<MapTile> tileVicinityRadius1 = map.GetVicinity(Coordinates, 1);
 
-        return tileVicinityRadius1.Any(t => t.TimeBiom.IsAirBarrier) == false;
+        return tileVicinityRadius1.Any(t => t.Biom.IsAirBarrier) == false;
     }
     public override void Execute(Map map)
     {

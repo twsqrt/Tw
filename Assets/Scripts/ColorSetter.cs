@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ColorSeter : MonoBehaviour
+public class ColorSetter : MonoBehaviour
 {
     public void SetColor(Color color)
     {
