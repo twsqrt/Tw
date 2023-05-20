@@ -14,7 +14,7 @@ public class MapTile : MonoBehaviour
 
     private Vector2Int _positionOnMap;
     private MapTileBuilding _building;
-    private MapTileBiom _biom;
+    private Biom _biom;
 
     public MapTileBuilding Building
     {
@@ -38,10 +38,10 @@ public class MapTile : MonoBehaviour
         }
     }
 
-    public MapTileBiom Biom => _biom;
+    public Biom TimeBiom => _biom;
     public Vector2Int PositionOnMap => _positionOnMap;
 
-    public void Init(Vector2Int positionOnMap, MapTileBiom biom)
+    public void Init(Vector2Int positionOnMap, Biom biom)
     {
         _positionOnMap = positionOnMap;
         _building = null;

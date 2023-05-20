@@ -20,7 +20,7 @@ public class NavalAttackPlayerMove : PlayerMove, ICoordinateMove
             return false;
 
         IEnumerable<MapTile> tileVicinityRadius2 = map.GetVicinity(Coordinates, 2);
-        return tileVicinityRadius2.Any(t => t.Biom.Type == MapTileBiomType.Ocean);
+        return tileVicinityRadius2.Any(t => t.TimeBiom.Type == BiomType.Ocean);
     }
 
     public override void Execute(Map map)

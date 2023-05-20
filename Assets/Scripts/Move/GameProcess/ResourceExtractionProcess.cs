@@ -12,7 +12,7 @@ public class ResourceExtractionProcess : GameProcess
 
         foreach(var tile in settlementTiles)
         {
-            IEnumerable<GameResources> vicinityResources = map.GetVicinity(tile.PositionOnMap).Where(t => t.Building == null).Select(t => t.Biom.Resources);
+            IEnumerable<GameResources> vicinityResources = map.GetVicinity(tile.PositionOnMap).Where(t => t.Building == null).Select(t => t.TimeBiom.Resources);
             foreach(GameResources resource in vicinityResources)
             {
                 tile.Building.Owner.Resources += resource;

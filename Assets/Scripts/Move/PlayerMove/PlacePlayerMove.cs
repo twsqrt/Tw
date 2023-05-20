@@ -21,7 +21,7 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
     {
         MapTile tile = map[Coordinates];
 
-        if (tile == null || tile.Building != null || tile.Biom.CanPlaceBulidingsOn == false) return false;
+        if (tile == null || tile.Building != null || tile.TimeBiom.CanPlaceBulidingsOn == false) return false;
 
         IEnumerable<MapTile> vicinityRadius1 = map.GetVicinity(tile.PositionOnMap, 1);
         IEnumerable<MapTile> vicinityRadius2 = map.GetVicinity(tile.PositionOnMap, 2);

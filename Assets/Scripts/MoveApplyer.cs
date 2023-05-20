@@ -11,7 +11,7 @@ public class MoveApplyer : MonoBehaviour
     [SerializeField] private Map _map;
     [SerializeField] private Camera _camera;
     [SerializeField] private MapTileBuildingFactory _buildingFactory;
-    [SerializeField] private MapTileBiomFactory _biomFactory;
+    [SerializeField] private BiomFactory _biomFactory;
     [SerializeField] private Player[] _players;
     [SerializeField] private PlayersView _playersView;
     [SerializeField] private PlayerMoveBuilder _playerMoveBuilder;

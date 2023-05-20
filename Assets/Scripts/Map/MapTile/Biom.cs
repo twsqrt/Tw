@@ -5,21 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class MapTileBiom : MonoBehaviour
+public class Biom : MonoBehaviour
 {
-    [SerializeField] private MapTileBiomType _type;
+    [SerializeField] private BiomType _type;
     [SerializeField] private bool _canPlaceBulidingsOn;
     [SerializeField] private bool _isAirBarrier;
     [SerializeField] private GameResources _resources;
 
-    private MapTileBiomFactory _factory;
-    public MapTileBiomType Type => _type;
+    private BiomFactory _factory;
+    public BiomType Type => _type;
     public bool CanPlaceBulidingsOn => _canPlaceBulidingsOn;
     public bool IsAirBarrier => _isAirBarrier;
 
     public GameResources Resources => _resources;
 
-    public void Init(MapTileBiomFactory factory)
+    public void Init(BiomFactory factory)
     {
         _factory = factory;
     }
@@ -31,7 +31,7 @@ public class MapTileBiom : MonoBehaviour
 }
 
 [Serializable]
-public enum MapTileBiomType
+public enum BiomType
 {
     Ocean,
     Beach,

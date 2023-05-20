@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Biom Factory", order = 51)]
-public class MapTileBiomFactory : ScriptableObject
+public class BiomFactory : ScriptableObject
 {
-    [SerializeField] private MapTileBiom _oceanPrefab;
-    [SerializeField] private MapTileBiom _beachPrefab;
-    [SerializeField] private MapTileBiom _plainsPrefab;
-    [SerializeField] private MapTileBiom _forestPrefab;
-    [SerializeField] private MapTileBiom _mountainsPrefab;
-    public MapTileBiom Create(MapTileBiomType type)
+    [SerializeField] private Biom _oceanPrefab;
+    [SerializeField] private Biom _beachPrefab;
+    [SerializeField] private Biom _plainsPrefab;
+    [SerializeField] private Biom _forestPrefab;
+    [SerializeField] private Biom _mountainsPrefab;
+    public Biom Create(BiomType type)
     {
-        MapTileBiom selectedPrefab;
+        Biom selectedPrefab;
         switch (type)
         {
-            case MapTileBiomType.Ocean:
+            case BiomType.Ocean:
                 selectedPrefab = _oceanPrefab;
                 break;
-            case MapTileBiomType.Beach:
+            case BiomType.Beach:
                 selectedPrefab = _beachPrefab;
                 break;
-            case MapTileBiomType.Plains:
+            case BiomType.Plains:
                 selectedPrefab = _plainsPrefab;
                 break;
-            case MapTileBiomType.Forest:
+            case BiomType.Forest:
                 selectedPrefab = _forestPrefab;
                 break;
-            case MapTileBiomType.Mountains:
+            case BiomType.Mountains:
                 selectedPrefab = _mountainsPrefab;
                 break;
             default:
@@ -39,13 +39,13 @@ public class MapTileBiomFactory : ScriptableObject
 
         return CreateByPrefab(selectedPrefab);
     }
-    public MapTileBiom CreateByPrefab(MapTileBiom prefab)
+    public Biom CreateByPrefab(Biom prefab)
     {
-        MapTileBiom newBiom = Instantiate(prefab);
+        Biom newBiom = Instantiate(prefab);
         newBiom.Init(this);
         return newBiom;
     }
-    public void Destroy(MapTileBiom content)
+    public void Destroy(Biom content)
     {
         Destroy(content.gameObject);
     }

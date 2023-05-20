@@ -47,17 +47,17 @@ public class Map : MonoBehaviour
 
     public IEnumerable<MapTile> Tiles => _tiles;
 
-    private MapTileBiomType BiomTypeGenerator(int i, int j)
+    private BiomType BiomTypeGenerator(int i, int j)
     {
         float x = 2f * (float)i / _width - 1f;
         float y = 2f * (float)j / _height -1f;
         float r = Mathf.Sqrt((x * x + y * y));
         float f = 0.5f * (Mathf.Sign(1f - 2f * r) * Mathf.Pow(1f - 2f * r, 2) + 1f) + 0.5f * Mathf.PerlinNoise(x + 0.5f, y - 0.5f);
 
-        return (MapTileBiomType)(5 * Mathf.Clamp(f, 0f, 0.99f));
+        return (BiomType)(5 * Mathf.Clamp(f, 0f, 0.99f));
     }
 
-    public void Init(MapTileBiomFactory biomFactory, MapTileBuildingFactory buildingFactory, Player[] players)
+    public void Init(BiomFactory biomFactory, MapTileBuildingFactory buildingFactory, Player[] players)
     {
         _quadCollider.transform.localScale = new Vector3(_width, _height, 1f);
 
@@ -74,7 +74,7 @@ public class Map : MonoBehaviour
                 MapTile newTile = Instantiate(_mapTilePrefab, transform);
                 newTile.name = $"MapTile i: {i}, j: {j}";
 
-                MapTileBiomType newTileBiomType = BiomTypeGenerator(i, j);
+                BiomType newTileBiomType = BiomTypeGenerator(i, j);
 
                 newTile.Init(new Vector2Int(i, j), biomFactory.Create(newTileBiomType));
                 newTile.transform.localPosition = transform.position + new Vector3(i - WidthOffset , 0f, j - HeightOffset);
