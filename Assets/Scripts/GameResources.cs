@@ -29,7 +29,7 @@ public struct GameResources
 
     public override string ToString()
     {
-        return $"Wood = {Wood} Coal = {Coal} Oil = {Oil}";
+        return $"Wood:{Wood} Coal:{Coal} Oil:{Oil}";
     }
 
     public bool IsEnough(GameResources cost)

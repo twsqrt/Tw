@@ -10,10 +10,10 @@ using UnityEngine;
 public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
 {
     public Vector2Int Coordinates { get; set; }
-    public MapTileBuildingType BuildingType { get; set; }
-    public MapTileBuildingFactory BuildingFactory { get; set; }
+    public BuildingInfo BuildingInfo { get; set; }
+    public BuildingFactory BuildingFactory { get; set; }
 
-    public override GameResources Cost => GameResources.zero;
+    public override GameResources Cost => BuildingInfo.Cost;
 
     public PlacePlayerMove(Player player) : base(player, MoveParameters.Coordinate | MoveParameters.Building) { }
 
@@ -21,7 +21,7 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
     {
         MapTile tile = map[Coordinates];
 
-        if (tile == null || tile.Building != null || tile.TimeBiom.CanPlaceBulidingsOn == false) return false;
+        if (tile == null || tile.Building != null || tile.Biom.CanPlaceBulidingsOn == false) return false;
 
         IEnumerable<MapTile> vicinityRadius1 = map.GetVicinity(tile.PositionOnMap, 1);
         IEnumerable<MapTile> vicinityRadius2 = map.GetVicinity(tile.PositionOnMap, 2);
@@ -34,6 +34,6 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
     {
         MapTile tile = map[Coordinates];
 
-        tile.Building = BuildingFactory.Create(BuildingType, _player);
+        tile.Building = BuildingFactory.Create(BuildingInfo, _player);
     }
 }

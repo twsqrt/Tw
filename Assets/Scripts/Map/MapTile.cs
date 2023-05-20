@@ -13,10 +13,10 @@ public class MapTile : MonoBehaviour
     [SerializeField] public Highlighter Highlighter;
 
     private Vector2Int _positionOnMap;
-    private MapTileBuilding _building;
+    private Building _building;
     private Biom _biom;
 
-    public MapTileBuilding Building
+    public Building Building
     {
         get
         {
@@ -25,7 +25,7 @@ public class MapTile : MonoBehaviour
 
         set
         {
-            _building?.DestroyContent();
+            _building?.DestroyBuilding();
             _building = value;
 
             if(_building != null)
@@ -38,7 +38,7 @@ public class MapTile : MonoBehaviour
         }
     }
 
-    public Biom TimeBiom => _biom;
+    public Biom Biom => _biom;
     public Vector2Int PositionOnMap => _positionOnMap;
 
     public void Init(Vector2Int positionOnMap, Biom biom)

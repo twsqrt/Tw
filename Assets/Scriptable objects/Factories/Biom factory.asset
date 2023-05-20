@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb75eb5f638d54419fe7ef2c5b73c81, type: 3}
-  m_Name: BiomFactory
+  m_Script: {fileID: 11500000, guid: 8c4a9275f5fe5f94496fe9899f6b4432, type: 3}
+  m_Name: Biom factory
   m_EditorClassIdentifier: 
   _oceanPrefab: {fileID: 7493211784872871173, guid: d42a4feb90c388241901df2b89040fe2, type: 3}
   _beachPrefab: {fileID: 7541794852832623516, guid: 95fb78a8eee56d04b839064249a5326e, type: 3}

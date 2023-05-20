@@ -8,11 +8,11 @@ public class ResourceExtractionProcess : GameProcess
 {
     public override void Execute(Map map)
     {
-        IEnumerable<MapTile> settlementTiles = map.Tiles.Where(t => t.Building != null && t.Building.Type == MapTileBuildingType.Settlement);
+        IEnumerable<MapTile> minesResourcesTiles = map.Tiles.Where(t => t.Building != null && t.Building.Info.IsMinesResources);
 
-        foreach(var tile in settlementTiles)
+        foreach(var tile in minesResourcesTiles)
         {
-            IEnumerable<GameResources> vicinityResources = map.GetVicinity(tile.PositionOnMap).Where(t => t.Building == null).Select(t => t.TimeBiom.Resources);
+            IEnumerable<GameResources> vicinityResources = map.GetVicinity(tile.PositionOnMap).Where(t => t.Building == null).Select(t => t.Biom.Resources);
             foreach(GameResources resource in vicinityResources)
             {
                 tile.Building.Owner.Resources += resource;

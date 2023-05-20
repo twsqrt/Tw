@@ -10,18 +10,24 @@ public class MoveApplyer : MonoBehaviour
 {
     [SerializeField] private Map _map;
     [SerializeField] private Camera _camera;
-    [SerializeField] private MapTileBuildingFactory _buildingFactory;
+    [SerializeField] private BuildingFactory _buildingFactory;
     [SerializeField] private BiomFactory _biomFactory;
     [SerializeField] private Player[] _players;
     [SerializeField] private PlayersView _playersView;
     [SerializeField] private PlayerMoveBuilder _playerMoveBuilder;
 
+    //template solution
+    [SerializeField] private BuildingInfo _settlement;
     private int _currentPlayerIndex;
     private GameProcess[] _gameProcesses; 
 
     private void Start()
     {
-        _map.Init(_biomFactory, _buildingFactory, _players);
+        _map.Init(_biomFactory);
+
+        //template soluion
+        _map[4,0].Building = _buildingFactory.Create(_settlement, _players[0]);
+        _map[_map.Width - 3, _map.Height - 1].Building = _buildingFactory.Create(_settlement, _players[1]);
 
         _currentPlayerIndex = 0;
         _playerMoveBuilder.Init();

@@ -139,13 +139,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6029091909649613797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6345b76d2b054740a74ad6883514bb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 34d5c3bd95a4a3d40af8f8de051c92f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
   _canPlaceBulidingsOn: 1
   _isAirBarrier: 0
   _resources:
-    Wood: 2
-    Coal: 1
+    Wood: 0
+    Coal: 2
     Oil: 2
