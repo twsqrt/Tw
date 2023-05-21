@@ -428,7 +428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568cb6ed8ccf61b40804b87db0e57fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingFactory: {fileID: 11400000, guid: 6d644eede9ddfd542a8092ca1b58ceae, type: 2}
   _buttons:
   - {fileID: 1282320246}
 --- !u!1 &285073813
@@ -1348,6 +1347,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &644076044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644076046}
+  - component: {fileID: 644076045}
+  m_Layer: 0
+  m_Name: MapView
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &644076045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644076044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68355171055b0c48aea0b36c60776c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapTileViewFactory: {fileID: 11400000, guid: a354e4070e43d3a4ab1d3d38227a8e48, type: 2}
+--- !u!4 &644076046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644076044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655119295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +2021,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _quadCollider: {fileID: 1042910292}
-  _mapTilePrefab: {fileID: 6844439614445194294, guid: 9ee1464e02462c540bd6436f65b804a7, type: 3}
   _width: 11
   _height: 11
 --- !u!1 &885689210
@@ -2842,6 +2885,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4865427232382131883, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
       propertyPath: m_text
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
+      propertyPath: Value
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
@@ -4092,6 +4139,10 @@ PrefabInstance:
       value: +1
       objectReference: {fileID: 0}
     - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
+      propertyPath: Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
       propertyPath: _value
       value: 1
       objectReference: {fileID: 0}
@@ -5070,9 +5121,6 @@ MonoBehaviour:
   _coordinateSelector: {fileID: 1992388373}
   _resourceSelector: {fileID: 1977852609}
   _timeSelector: {fileID: 711963661}
-  Player:
-    _name: 
-    _color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1774942354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5083,6 +5131,10 @@ PrefabInstance:
     - target: {fileID: 4865427232382131883, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
       propertyPath: m_text
       value: +5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
+      propertyPath: Value
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
       propertyPath: _value
@@ -5833,6 +5885,10 @@ PrefabInstance:
       value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
+      propertyPath: Value
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214183527096420520, guid: dc76858f876212c4ca9c64d486c1faed, type: 3}
       propertyPath: _value
       value: -5
       objectReference: {fileID: 0}
@@ -6067,14 +6123,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeFrame: {fileID: 574183665}
   _map: {fileID: 826754579}
+  _mapView: {fileID: 644076045}
   _camera: {fileID: 963194227}
-  _buildingFactory: {fileID: 11400000, guid: 6d644eede9ddfd542a8092ca1b58ceae, type: 2}
   _biomFactory: {fileID: 11400000, guid: 95ae620230724c8468474de9519e8280, type: 2}
-  _players:
-  - _name: player1
-    _color: {r: 1, g: 0.9176218, b: 0, a: 1}
-  - _name: player2
-    _color: {r: 1, g: 0, b: 0.15988588, a: 1}
+  _playersInfo:
+  - {fileID: 11400000, guid: 9b2f8a294033d5b46b7c5311de9db10d, type: 2}
+  - {fileID: 11400000, guid: 407b134b38c025a4ebb1f9a758f02d0f, type: 2}
   _playersView: {fileID: 1719701940}
   _playerMoveBuilder: {fileID: 1765714105}
   _settlement: {fileID: 11400000, guid: 3ae7c9e014aa556488f35a18b08c1b9a, type: 2}

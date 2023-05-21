@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d95d755a92e534f8348a176e729a7f, type: 3}
-  m_Name: Player 2
+  m_Script: {fileID: 11500000, guid: 34d5c3bd95a4a3d40af8f8de051c92f8, type: 3}
+  m_Name: Forest
   m_EditorClassIdentifier: 
-  _id: 2
-  _name: Player 2
-  _color: {r: 0.6603774, g: 0.16842362, b: 0, a: 1}
+  _type: 3
+  _isBuildingAllowed: 1
+  _isAirBarrier: 0
+  _resources:
+    Wood: 4
+    Coal: 2
+    Oil: 1
+  _prefab: {fileID: 8438545390617045397, guid: 57c341ec2a04e364e96cf7af6e5ad37c, type: 3}

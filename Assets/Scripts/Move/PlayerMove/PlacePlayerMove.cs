@@ -11,7 +11,6 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
 {
     public Vector2Int Coordinates { get; set; }
     public BuildingInfo BuildingInfo { get; set; }
-    public BuildingFactory BuildingFactory { get; set; }
 
     public override GameResources Cost => BuildingInfo.Cost;
 
@@ -21,7 +20,7 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
     {
         MapTile tile = map[Coordinates];
 
-        if (tile == null || tile.Building != null || tile.Biom.CanPlaceBulidingsOn == false) return false;
+        if (tile == null || tile.Building != null || tile.Biom.IsBuildingAllowed == false) return false;
 
         IEnumerable<MapTile> vicinityRadius1 = map.GetVicinity(tile.PositionOnMap, 1);
         IEnumerable<MapTile> vicinityRadius2 = map.GetVicinity(tile.PositionOnMap, 2);
@@ -33,7 +32,6 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
     public override void Execute(Map map)
     {
         MapTile tile = map[Coordinates];
-
-        tile.Building = BuildingFactory.Create(BuildingInfo, _player);
+        tile.Building = new Building(BuildingInfo, _player);
     }
 }

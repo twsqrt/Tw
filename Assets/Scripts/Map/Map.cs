@@ -1,22 +1,15 @@
-﻿using Newtonsoft.Json.Schema;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class Map : MonoBehaviour
 {
     [SerializeField] private MeshCollider _quadCollider;
-    [SerializeField] private MapTile _mapTilePrefab;
 
     [SerializeField] private int _width;
     [SerializeField] private int _height;
 
     private MapTile[] _tiles;
+    public IEnumerable<MapTile> Tiles => _tiles;
 
     public int Width => _width;
     public int Height => _height;
@@ -52,8 +45,6 @@ public class Map : MonoBehaviour
         return false;
     }
 
-    public IEnumerable<MapTile> Tiles => _tiles;
-
     private BiomType BiomTypeGenerator(int i, int j)
     {
         float x = 2f * (float)i / _width - 1f;
@@ -70,23 +61,14 @@ public class Map : MonoBehaviour
 
         _tiles = new MapTile[_width * _height];
 
-        int widthOffset = _width / 2;
-        int heightOffset = _height / 2;
-
         for(int i =0; i < _width; i++)
         {
             for (int j = 0; j < _height; j++)
             {
+                BiomType biomType = BiomTypeGenerator(i, j);
+                Biom biom = biomFactory.Create(biomType);
 
-                MapTile newTile = Instantiate(_mapTilePrefab, transform);
-                newTile.name = $"MapTile i: {i}, j: {j}";
-
-                BiomType newTileBiomType = BiomTypeGenerator(i, j);
-
-                newTile.Init(new Vector2Int(i, j), biomFactory.Create(newTileBiomType));
-                newTile.transform.localPosition = transform.position + new Vector3(i - widthOffset , 0f, j - heightOffset);
-
-                this[i, j] = newTile;
+                this[i, j] = new MapTile(new Vector2Int(i,j), biom);
             }
         }
     }

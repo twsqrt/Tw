@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MoveBuildingSelector : ParameterSelector<IBuildingMove>
 {
-    [SerializeField] private BuildingFactory _buildingFactory;
     [SerializeField] private BuildingButton[] _buttons;
 
     private IBuildingMove _buildingMove;
@@ -22,7 +21,6 @@ public class MoveBuildingSelector : ParameterSelector<IBuildingMove>
     {
         gameObject.SetActive(true);
         _buildingMove = buildingMove;
-        _buildingMove.BuildingFactory = _buildingFactory;
     }
 
     protected override void BeforeExit()

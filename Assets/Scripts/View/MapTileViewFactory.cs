@@ -11,10 +11,16 @@ public class MapTileViewFactory : GameObjectFactory<MapTile, MapTileView>
     public override MapTileView Create(MapTile tile)
     {
         BiomView biomView = _biomViewFactory.Create(tile.Biom);
-        BuildingView buildingView = _buildingViewFactory.Create(tile.Building);
 
         MapTileView tileView = Instantiate(_mapTileViewPrefab);
-        tileView.Init(this, biomView, buildingView);
+
+        if(tile.Building == null)
+            tileView.Init(this, biomView);
+        else
+        {
+            BuildingView buildingView = _buildingViewFactory.Create(tile.Building);
+            tileView.Init(this, biomView, buildingView);
+        }
 
         return tileView;
     }

@@ -7,8 +7,8 @@ public class BuildingInfo : ScriptableObject
 {
     [SerializeField] private string _name;
     [SerializeField] private GameResources _cost; 
-    [SerializeField] private BuildingView _prefab;
     [SerializeField] private bool _isMinesResources;
+    [SerializeField] private BuildingView _prefab;
 
     public string Name => _name;
     public GameResources Cost => _cost;

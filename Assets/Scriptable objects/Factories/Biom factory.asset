@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4a9275f5fe5f94496fe9899f6b4432, type: 3}
   m_Name: Biom factory
   m_EditorClassIdentifier: 
-  _oceanPrefab: {fileID: 7493211784872871173, guid: d42a4feb90c388241901df2b89040fe2, type: 3}
-  _beachPrefab: {fileID: 7541794852832623516, guid: 95fb78a8eee56d04b839064249a5326e, type: 3}
-  _plainsPrefab: {fileID: 4817819474298731283, guid: 7e2079202ff498940aca9eaad4289c9c, type: 3}
-  _forestPrefab: {fileID: 9054041348615906066, guid: 57c341ec2a04e364e96cf7af6e5ad37c, type: 3}
-  _mountainsPrefab: {fileID: 5033078238209885365, guid: e42ff041350df0046a09f109b2cdf47b, type: 3}
+  _ocean: {fileID: 11400000, guid: 01e9a06102ed6f44baee3840c8b6cfde, type: 2}
+  _beach: {fileID: 11400000, guid: 723f8da435e27a745983d2f23608e3f8, type: 2}
+  _plains: {fileID: 11400000, guid: a662419b9ac111b4781e08e1fe2c8ad8, type: 2}
+  _forest: {fileID: 11400000, guid: 82f58e6dbef070146bff5582373919f0, type: 2}
+  _mountains: {fileID: 11400000, guid: 2709365e9e6125f4db3bc1e2b0d6e764, type: 2}

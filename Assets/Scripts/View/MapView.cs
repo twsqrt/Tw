@@ -6,7 +6,7 @@ public class MapView : MonoBehaviour
 {
     [SerializeField] MapTileViewFactory _mapTileViewFactory;
 
-    public void RenderMap(Map map)
+    public void Render(Map map)
     {
         int widthOffset = map.Width / 2;
         int heightOffset = map.Height / 2;
@@ -21,7 +21,8 @@ public class MapView : MonoBehaviour
                 MapTileView tileView = _mapTileViewFactory.Create(map[i,j]);
                 tileView.name = $"x:{i}, y:{j}";
 
-                tileView.transform.localPosition = positionWithOffset + new Vector3(i, 0, j);
+                tileView.transform.localPosition = positionWithOffset + new Vector3(i, 0f, j);
+                tileView.transform.SetParent(transform);
             }
         }
     } 

@@ -10,11 +10,16 @@ public class MapTileView : MonoBehaviour
 
     private MapTileViewFactory _factory;
 
-    public void Init(MapTileViewFactory factory, BiomView biomView, BuildingView buildingView)
+    public void Init(MapTileViewFactory factory, BiomView biomView )
     {
         _factory = factory;
         _biomView = biomView;
         SetParentage(_biomView.transform);
+    }
+
+    public void Init(MapTileViewFactory factory, BiomView biomView, BuildingView buildingView)
+    {
+        Init(factory, biomView);
 
         _buildingView =buildingView;
         SetParentage(_buildingView.transform);

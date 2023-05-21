@@ -5,31 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Biom : MonoBehaviour
+[CreateAssetMenu(fileName = "New Biom", order = 51)]
+public class Biom : ScriptableObject
 {
+    //template solution
     [SerializeField] private BiomType _type;
-    [SerializeField] private bool _canPlaceBulidingsOn;
+    [SerializeField] private bool _isBuildingAllowed;
     [SerializeField] private bool _isAirBarrier;
     [SerializeField] private GameResources _resources;
     [SerializeField] private BiomView _prefab;
 
-
-    private BiomFactory _factory;
     public BiomType Type => _type;
-    public bool CanPlaceBulidingsOn => _canPlaceBulidingsOn;
+    public bool IsBuildingAllowed => _isBuildingAllowed;
     public bool IsAirBarrier => _isAirBarrier;
     public GameResources Resources => _resources;
     public BiomView Prefab => _prefab;
-
-    public void Init(BiomFactory factory)
-    {
-        _factory = factory;
-    }
-
-    public void DestroyContent()
-    {
-        _factory.Destroy(this);
-    }
 }
 
 [Serializable]

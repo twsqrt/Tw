@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4211118061726362579}
-  - component: {fileID: 7493211784872871173}
+  - component: {fileID: 5234667124993796424}
   m_Layer: 0
   m_Name: Ocean
   m_TagString: Untagged
@@ -116,7 +116,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7493211784872871173
+--- !u!114 &5234667124993796424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,13 +125,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3960145954871183973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d5c3bd95a4a3d40af8f8de051c92f8, type: 3}
+  m_Script: {fileID: 11500000, guid: e052251b187c5844898374c99feb01a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
-  _canPlaceBulidingsOn: 0
-  _isAirBarrier: 0
-  _resources:
-    Wood: 0
-    Coal: 1
-    Oil: 5
