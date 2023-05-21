@@ -70,8 +70,8 @@ public class Map : MonoBehaviour
 
         _tiles = new MapTile[_width * _height];
 
-        int WidthOffset = _width / 2;
-        int HeightOffset = _height / 2;
+        int widthOffset = _width / 2;
+        int heightOffset = _height / 2;
 
         for(int i =0; i < _width; i++)
         {
@@ -84,7 +84,7 @@ public class Map : MonoBehaviour
                 BiomType newTileBiomType = BiomTypeGenerator(i, j);
 
                 newTile.Init(new Vector2Int(i, j), biomFactory.Create(newTileBiomType));
-                newTile.transform.localPosition = transform.position + new Vector3(i - WidthOffset , 0f, j - HeightOffset);
+                newTile.transform.localPosition = transform.position + new Vector3(i - widthOffset , 0f, j - heightOffset);
 
                 this[i, j] = newTile;
             }

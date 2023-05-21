@@ -11,13 +11,15 @@ public class Biom : MonoBehaviour
     [SerializeField] private bool _canPlaceBulidingsOn;
     [SerializeField] private bool _isAirBarrier;
     [SerializeField] private GameResources _resources;
+    [SerializeField] private BiomView _prefab;
+
 
     private BiomFactory _factory;
     public BiomType Type => _type;
     public bool CanPlaceBulidingsOn => _canPlaceBulidingsOn;
     public bool IsAirBarrier => _isAirBarrier;
-
     public GameResources Resources => _resources;
+    public BiomView Prefab => _prefab;
 
     public void Init(BiomFactory factory)
     {
