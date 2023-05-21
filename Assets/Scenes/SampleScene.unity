@@ -1304,6 +1304,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &574183664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 574183666}
+  - component: {fileID: 574183665}
+  m_Layer: 0
+  m_Name: TimeFrame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &574183665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574183664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962b13e3efa64b644b8d6dc06dd4e0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &574183666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574183664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 267.0358, y: 576.15924, z: 0.7912265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655119295
 GameObject:
   m_ObjectHideFlags: 0
@@ -5775,7 +5819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ab6ed398343d6448c4cd4181fe8ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _map: {fileID: 826754579}
+  _timeFrame: {fileID: 574183665}
   _camera: {fileID: 963194227}
 --- !u!1001 &2036421485
 PrefabInstance:
@@ -6021,6 +6065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1284b0fcbddb9b64283108a7a2ca7b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeFrame: {fileID: 574183665}
   _map: {fileID: 826754579}
   _camera: {fileID: 963194227}
   _buildingFactory: {fileID: 11400000, guid: 6d644eede9ddfd542a8092ca1b58ceae, type: 2}

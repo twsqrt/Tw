@@ -18,32 +18,39 @@ public class Map : MonoBehaviour
 
     private MapTile[] _tiles;
 
-    private const int GAME_MAP_LAYER = 1 << 6;
-
     public int Width => _width;
     public int Height => _height;
+
+    public MapTile this[int x, int y]
+    {
+        set
+        {
+            _tiles[x + y * _width] = value;
+        }
+        get
+        {
+            return _tiles[x + y * _width];
+        }
+    }
+
+    public MapTile this[Vector2Int coords] => this[coords.x, coords.y];
 
     private bool IsValidCoordinates(int x, int y)
     {
         return x >= 0 && x < _width && y >= 0 && y < _height;
     }
 
-    public MapTile this[int x, int y]
+    public bool TryGetTile(int x, int y, out MapTile tile)
     {
-        set
+        if(IsValidCoordinates(x,y))
         {
-            if(IsValidCoordinates(x,y))
-                _tiles[x + y * _width] = value;
+            tile = _tiles[x + y * _width];
+            return true;
         }
-        get
-        {
-            if(IsValidCoordinates(x,y))
-                return _tiles[x + y * _width];
-            return null;
-        }
-    }
 
-    public MapTile this[Vector2Int coords] => this[coords.x, coords.y];
+        tile = null;
+        return false;
+    }
 
     public IEnumerable<MapTile> Tiles => _tiles;
 
@@ -84,30 +91,13 @@ public class Map : MonoBehaviour
         }
     }
 
-    public MapTile GetTile(Ray ray)
-    {
-        if(Physics.Raycast(ray, out RaycastHit hit, 64f, GAME_MAP_LAYER))
-        {
-            Vector3 mapOffset = new Vector3(_width * 0.5f, 0, _height * 0.5f);
-
-            Vector3 point = hit.point - transform.position + mapOffset;
-            int i = (int) point.x;
-            int j = (int) point.z;
-
-            return this[i, j]; 
-        }
-        return null; 
-    }
-
     public IEnumerable<MapTile> GetVicinity(Vector2Int positionOnMap, int radius = 1)
     {
         for(int i = -radius; i <= radius; i++)
         {
             for (int j = -radius; j <= radius; j++)
             {
-                MapTile tile = this[positionOnMap.x + i, positionOnMap.y + j];
-
-                if (tile != null)
+                if(TryGetTile(positionOnMap.x + i, positionOnMap.y + j, out MapTile tile))
                     yield return tile;
             }
         }

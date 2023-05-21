@@ -17,7 +17,7 @@ public class Building : MonoBehaviour
         _info = info;
         _owner = owner;
 
-        _colorSetter.SetColor(_owner.Color);
+        _colorSetter.SetColor(_owner.Info.Color);
     }
 
     public void DestroyBuilding()

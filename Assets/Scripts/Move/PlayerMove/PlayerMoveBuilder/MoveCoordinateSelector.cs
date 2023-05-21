@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
 {
-    [SerializeField] private Map _map;
+    //template solution
+    [SerializeField] private TimeFrame _timeFrame;
     [SerializeField] private Camera _camera;
 
     private PlayerMoveHighlighter _moveHighlighter;
@@ -12,7 +13,7 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
 
     public override void Init()
     {
-        _moveHighlighter = new PlayerMoveHighlighter(_map);
+        _moveHighlighter = new PlayerMoveHighlighter(_timeFrame._map);
     }
 
     protected override void AfterStart(ICoordinateMove coordinateMove)
@@ -31,12 +32,10 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            MapTile tile = _map.GetTile(ray);
 
-            if (tile != null && _coordinateMove.IsValidCoordinate(tile.PositionOnMap, _map))
+            if (_timeFrame.TryGetPositionOnMap(ray, out Vector2Int positionOnMap) && _coordinateMove.IsValidCoordinate(positionOnMap, _timeFrame._map))
             {
-                _coordinateMove.Coordinates = tile.PositionOnMap;
-
+                _coordinateMove.Coordinates = positionOnMap;
                 Exit();
             }
         }

@@ -8,48 +8,44 @@ using UnityEngine;
 
 public class MoveApplyer : MonoBehaviour
 {
+    //template soluion
+    [SerializeField] private TimeFrame _timeFrame;
     [SerializeField] private Map _map;
     [SerializeField] private Camera _camera;
     [SerializeField] private BuildingFactory _buildingFactory;
     [SerializeField] private BiomFactory _biomFactory;
-    [SerializeField] private Player[] _players;
+    [SerializeField] private PlayerInfo[] _playersInfo;
     [SerializeField] private PlayersView _playersView;
     [SerializeField] private PlayerMoveBuilder _playerMoveBuilder;
 
     //template solution
     [SerializeField] private BuildingInfo _settlement;
-    private int _currentPlayerIndex;
+
     private GameProcess[] _gameProcesses; 
+
+    private RingArray<Player> _players;
+
 
     private void Start()
     {
         _map.Init(_biomFactory);
 
+        _players = new RingArray<Player>(_playersInfo.Select(pi => new Player(pi)));
+
         //template soluion
         _map[4,0].Building = _buildingFactory.Create(_settlement, _players[0]);
         _map[_map.Width - 3, _map.Height - 1].Building = _buildingFactory.Create(_settlement, _players[1]);
 
-        _currentPlayerIndex = 0;
+        _timeFrame.Init(_map);
+
         _playerMoveBuilder.Init();
-        _playerMoveBuilder.Player = _players[_currentPlayerIndex];
+        _playerMoveBuilder.Player = _players.GetCurrent();
         _playerMoveBuilder.OnMoveBuilt += OnPlayerMoveCreated;
 
-        _playersView.Init(_players);
+        _playersView.Init(_players.ToArray());
 
         _gameProcesses = new GameProcess[] { new ResourceExtractionProcess() };
 
-    }
-
-    public bool TryApplyPlayerMove(PlayerMove move)
-    {
-        GameResources moveCost = move.Cost;
-        if (move.Player.Resources.IsEnough(moveCost) == false ||
-            move.TryExecute(_map) == false)
-            return false;
-
-        move.Player.Resources -= moveCost;
-        ApplyGameProcesses();
-        return true;
     }
 
     private void ApplyGameProcesses()
@@ -62,10 +58,9 @@ public class MoveApplyer : MonoBehaviour
 
     public void OnPlayerMoveCreated(PlayerMove move)
     {
-        //template solution
-        TryApplyPlayerMove(move);
+        if(_timeFrame.TryApplyPlayerMove(move))
+            ApplyGameProcesses();
 
-        _currentPlayerIndex = (_currentPlayerIndex + 1 ) % _players.Count();
-        _playerMoveBuilder.Player = _players[_currentPlayerIndex];
+        _playerMoveBuilder.Player = _players.Next();
     }
 }

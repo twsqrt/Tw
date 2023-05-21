@@ -6,18 +6,13 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[Serializable]
 public class Player
 {
-    [SerializeField] private string _name;
-    [SerializeField] private Color _color;
-
-
+    private PlayerInfo _info;
     private GameResources _resources = new GameResources(100, 100, 100);
 
     public Action<Player> OnPlayerDataChanged;
-    public string Name => _name;
-    public Color Color => _color;
+    public PlayerInfo Info => _info;
 
     public GameResources Resources
     {
@@ -31,5 +26,18 @@ public class Player
             _resources = value;
             OnPlayerDataChanged?.Invoke(this);
         }
+    }
+
+    public Player(PlayerInfo info)
+    {
+        _info = info;
+    }
+
+    public Player Clone()
+    {
+        Player playerClone = new Player(_info);
+        playerClone.Resources = _resources;
+
+        return playerClone;
     }
 }

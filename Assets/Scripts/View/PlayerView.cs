@@ -12,7 +12,7 @@ public class PlayerView : MonoBehaviour
 
     public void Init(Player player)
     {
-        textMeshProUGUI.color = player.Color;
+        textMeshProUGUI.color = player.Info.Color;
         player.OnPlayerDataChanged += Render;
 
         Render(player);
@@ -21,7 +21,7 @@ public class PlayerView : MonoBehaviour
     public void Render(Player player)
     {
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine($"Player: {player.Name}");
+        sb.AppendLine($"Player: {player.Info.Name}");
         sb.AppendLine($"Resources: {player.Resources}");
 
         textMeshProUGUI.text = sb.ToString();
