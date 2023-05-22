@@ -14,4 +14,15 @@ public class Building
         _info = info;
         _owner = owner;
     }
+
+    private Building(Building original)
+    {
+        _info = original.Info;
+        _owner = original.Owner;
+    }
+
+    public Building Clone()
+    {
+        return new Building(this);
+    }  
 }

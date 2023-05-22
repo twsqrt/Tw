@@ -6,18 +6,23 @@ using UnityEngine;
 public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
 {
     //template solution
-    [SerializeField] private TimeFrame _timeFrame;
+    [SerializeField] private MoveApplyer _moveApplyer;
     [SerializeField] private Camera _camera;
     [SerializeField] private MapView _mapView;
 
     private ICoordinateMove _coordinateMove;
     private IEnumerable<Highlighter> _highlighters;
 
+    private TimeFrame _currentTimeFrame;
+    private Map _currentMapClone;
+
     protected override void AfterStart(ICoordinateMove coordinateMove)
     {
         _coordinateMove = coordinateMove;
+        _currentTimeFrame = _moveApplyer.CurrentTimeFrame;
+        _currentMapClone = _currentTimeFrame.MapClone;
 
-        _highlighters = _coordinateMove.GetAllValidCoordinate(_timeFrame._map).Select(p => _mapView[p.x, p.y].Highlighter);
+        _highlighters = _coordinateMove.GetAllValidCoordinate(_currentMapClone).Select(p => _mapView[p.x, p.y].Highlighter);
 
         HighlightersEnable();
     }
@@ -50,7 +55,7 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (_timeFrame.TryGetPositionOnMap(ray, out Vector2Int positionOnMap) && _coordinateMove.IsValidCoordinate(positionOnMap, _timeFrame._map))
+            if (_mapView.TryGetPositionOnMap(ray, out Vector2Int positionOnMap) && _coordinateMove.IsValidCoordinate(positionOnMap, _currentMapClone))
             {
                 _coordinateMove.Coordinates = positionOnMap;
                 Exit();

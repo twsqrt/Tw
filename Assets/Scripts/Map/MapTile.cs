@@ -23,6 +23,22 @@ public class MapTile
         _biom = biom;
     }
 
+    private MapTile(MapTile original)
+    {
+        _positionOnMap = original.PositionOnMap;
+        _biom = original.Biom;
+
+        if(original.Building != null)
+            _building = original.Building.Clone();
+        else
+            _building = null;
+    }
+
+    public MapTile Clone()
+    {
+        return new MapTile(this);
+    }
+
     public Building Building
     {
         get

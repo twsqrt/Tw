@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MapView : MonoBehaviour
 {
+    [SerializeField] private MeshCollider _quadCollider;
     [SerializeField] MapTileViewFactory _mapTileViewFactory;
+
+    private const int GAME_MAP_LAYER = 1 << 6;
 
     private MapTileView[] _tilesView;
     private int _width;
@@ -30,6 +33,8 @@ public class MapView : MonoBehaviour
     {
         _width = map.Width;
         _height = map.Height;
+
+        _quadCollider.transform.localScale = new Vector3(_width, _height, 1f);
 
         _tilesView = new MapTileView[_width * _height];
         
@@ -57,5 +62,19 @@ public class MapView : MonoBehaviour
         {
             tileView.Destroy();
         }
+    }
+
+    public bool TryGetPositionOnMap(Ray ray, out Vector2Int positionOnMap)
+    {
+        if (Physics.Raycast(ray, out RaycastHit hit, 64f, GAME_MAP_LAYER))
+        {
+            Vector3 mapOffset = new Vector3(_width * 0.5f, 0, _height * 0.5f);
+
+            Vector3 pointOnQuad = hit.point - transform.position + mapOffset;
+            positionOnMap = new Vector2Int((int)pointOnQuad.x, (int)pointOnQuad.z);
+            return true;
+        }
+        positionOnMap = Vector2Int.zero;
+        return false;
     }
 }

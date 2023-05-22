@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Map : MonoBehaviour
+public class Map
 {
-    [SerializeField] private MeshCollider _quadCollider;
-
-    [SerializeField] private int _width;
-    [SerializeField] private int _height;
+    private MapConfiguration _configuration;
+    private int _width;
+    private int _height;
 
     private MapTile[] _tiles;
     public IEnumerable<MapTile> Tiles => _tiles;
@@ -55,10 +55,29 @@ public class Map : MonoBehaviour
         return (BiomType)(5 * Mathf.Clamp(f, 0f, 0.99f));
     }
 
-    public void Init(BiomFactory biomFactory)
+    public Map(MapConfiguration configuration)
     {
-        _quadCollider.transform.localScale = new Vector3(_width, _height, 1f);
+        _configuration = configuration;
 
+        _width = configuration.MapWidth;
+        _height = configuration.MapHeight;
+        GenerateMap(configuration.BiomFactory);
+    }
+
+    private Map(Map original)
+    {
+        _width = original.Width;
+        _height = original.Height;
+        _tiles = original.Tiles.Select(t => t.Clone() ).ToArray();
+    }
+
+    public Map Clone()
+    {
+        return new Map(this);
+    }
+
+    private void GenerateMap(BiomFactory biomFactory)
+    {
         _tiles = new MapTile[_width * _height];
 
         for(int i =0; i < _width; i++)
@@ -72,6 +91,7 @@ public class Map : MonoBehaviour
             }
         }
     }
+
 
     public IEnumerable<MapTile> GetVicinity(Vector2Int positionOnMap, int radius = 1)
     {
