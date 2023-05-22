@@ -23,10 +23,10 @@ public class MoveApplyer : MonoBehaviour
     private RingArray<Player> _players;
 
     //template solution
-    private TimeFrame _currentTimeFrame;
+    private GameState _currentTimeFrame;
 
-    public event Action<TimeFrame> OnTimeFrameChange;
-    public TimeFrame CurrentTimeFrame
+    public event Action<GameState> OnTimeFrameChange;
+    public GameState CurrentTimeFrame
     {
         get
         {
@@ -50,7 +50,7 @@ public class MoveApplyer : MonoBehaviour
         initialMap[4,0].Building = new Building(_settlement, _players[0]);
         initialMap[initialMap.Width - 3, initialMap.Height - 1].Building = new Building(_settlement, _players[1]);
 
-        CurrentTimeFrame = new TimeFrame(initialMap);
+        CurrentTimeFrame = new GameState(initialMap);
 
         _mapView.Render(initialMap);
 

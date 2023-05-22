@@ -1,6 +1,6 @@
 using System;
 
-public class TimeFrame
+public class GameState
 {
     private Map _map;
     private int _time;
@@ -9,21 +9,21 @@ public class TimeFrame
     //template solution
     public Map MapClone => _map.Clone();
 
-    public TimeFrame(Map map)
+    public GameState(Map map)
     {
         _map = map;
         _time = 1;
     }
 
-    private TimeFrame(TimeFrame original)
+    private GameState(GameState original)
     {
         _map = original.MapClone;
         _time = original.Time;
     }  
 
-    public TimeFrame Clone()
+    public GameState Clone()
     {
-        return new TimeFrame(this);
+        return new GameState(this);
     } 
 
     public void ApplyMove(IMove move)
