@@ -2,7 +2,7 @@ using System;
 
 public static class PlayerMoveFactory
 {
-    public static PlayerMove Create(PlayerMoveType type, Player player)
+    public static PlayerMove Create(PlayerMoveType type, PlayerState player)
     {
         switch(type)
         {

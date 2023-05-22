@@ -10,7 +10,7 @@ public class NavalAttackPlayerMove : PlayerMove, ICoordinateMove
     public Vector2Int Coordinates { get; set; }
     public override GameResources Cost => new GameResources(1, 2, 3);
 
-    public NavalAttackPlayerMove(Player player) : base(player, MoveParameters.Coordinate) {}
+    public NavalAttackPlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate) {}
 
     public override bool IsValidMove(Map map)
     {

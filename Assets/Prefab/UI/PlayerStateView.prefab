@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2728518501119302732}
   - component: {fileID: 2074621892751854994}
   m_Layer: 5
-  m_Name: PlayerView
+  m_Name: PlayerStateView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8060368734882873760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc99217f651c50540aa45c621e8ea832, type: 3}
+  m_Script: {fileID: 11500000, guid: af7af80966a64974fa7bf576cc987130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshProUGUI: {fileID: 2582407034509238198}

@@ -11,7 +11,7 @@ public class RemovePlayerMove : PlayerMove, ICoordinateMove
     public Vector2Int Coordinates { get; set; }
     public override GameResources Cost => GameResources.zero;
 
-    public RemovePlayerMove(Player player) : base(player, MoveParameters.Coordinate) { }
+    public RemovePlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate) { }
 
     public override bool IsValidMove(Map map)
     {

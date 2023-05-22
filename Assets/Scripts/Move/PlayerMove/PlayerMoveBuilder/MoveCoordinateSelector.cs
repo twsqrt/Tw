@@ -19,10 +19,10 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
     protected override void AfterStart(ICoordinateMove coordinateMove)
     {
         _coordinateMove = coordinateMove;
-        _currentGameState = _moveApplyer.CurrentTimeFrame;
+        _currentGameState = _moveApplyer.CurrentGameState;
         _currentMapClone = _currentGameState.MapClone;
 
-        _highlighters = _coordinateMove.GetAllValidCoordinate(_currentMapClone).Select(p => _mapView[p.x, p.y].Highlighter);
+        _highlighters = _coordinateMove.GetAllValidCoordinate(_currentMapClone).Select(p => _mapView[p].Highlighter);
 
         HighlightersEnable();
     }

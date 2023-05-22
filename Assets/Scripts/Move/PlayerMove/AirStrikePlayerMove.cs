@@ -10,7 +10,7 @@ public class AirStrikePlayerMove : PlayerMove, ICoordinateMove
     public Vector2Int Coordinates {get; set;}
     public override GameResources Cost => new GameResources(5, 2, 2);
 
-    public AirStrikePlayerMove(Player player) : base(player, MoveParameters.Coordinate) { }
+    public AirStrikePlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate) { }
 
     public override bool IsValidMove(Map map)
     {

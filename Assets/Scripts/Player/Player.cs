@@ -1,43 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
-public class Player
+[CreateAssetMenu(fileName = "New Player Info", order = 51)]
+public class Player :  ScriptableObject
 {
-    private PlayerInfo _info;
-    private GameResources _resources = new GameResources(100, 100, 100);
+    [SerializeField] private int _id;
+    [SerializeField] private string _name;
+    [SerializeField] private Color _color;
 
-    public Action<Player> OnPlayerDataChanged;
-    public PlayerInfo Info => _info;
+    public int Id => _id;
+    public string Name => _name;
+    public Color Color => _color;
 
-    public GameResources Resources
+
+    public override bool Equals(object obj)
     {
-        get
+        if(obj is Player info )
         {
-            return _resources;
+            return _id == info.Id;
         }
-
-        set
-        {
-            _resources = value;
-            OnPlayerDataChanged?.Invoke(this);
-        }
+        return false;
     }
 
-    public Player(PlayerInfo info)
+    public override int GetHashCode()
     {
-        _info = info;
-    }
-
-    public Player Clone()
-    {
-        Player playerClone = new Player(_info);
-        playerClone.Resources = _resources;
-
-        return playerClone;
+        return _id.GetHashCode();
     }
 }

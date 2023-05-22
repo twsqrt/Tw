@@ -8,10 +8,10 @@ using UnityEngine;
 public abstract class PlayerMove : IMove
 {
     private MoveParameters _parameters;
-    protected Player _player;
-    public Player Player => _player;
+    protected PlayerState _player;
+    public PlayerState Player => _player;
 
-    public PlayerMove(Player player, MoveParameters parameters)
+    public PlayerMove(PlayerState player, MoveParameters parameters)
     {
         _player = player;
         _parameters = parameters;

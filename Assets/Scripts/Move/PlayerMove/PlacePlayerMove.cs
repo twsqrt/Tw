@@ -14,7 +14,7 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
 
     public override GameResources Cost => BuildingInfo.Cost;
 
-    public PlacePlayerMove(Player player) : base(player, MoveParameters.Coordinate | MoveParameters.Building) { }
+    public PlacePlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate | MoveParameters.Building) { }
 
     public override bool IsValidMove(Map map)
     {

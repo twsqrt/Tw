@@ -6,7 +6,7 @@ public class TimeTravelPlayerMove : PlayerMove, IResoucesMove, ITimeMove
     public int Time { get; set;}
     public override GameResources Cost => Time * new GameResources(2,2,2);
 
-    public TimeTravelPlayerMove(Player player) : base(player, MoveParameters.Resources | MoveParameters.Time)
+    public TimeTravelPlayerMove(PlayerState player) : base(player, MoveParameters.Resources | MoveParameters.Time)
     {
         //template solution
         Time = 0;
