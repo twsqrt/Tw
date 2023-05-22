@@ -6,12 +6,34 @@ public class MapView : MonoBehaviour
 {
     [SerializeField] MapTileViewFactory _mapTileViewFactory;
 
+    private MapTileView[] _tilesView;
+    private int _width;
+    private int _height;
+
+    public MapTileView this[int x, int y]
+    {
+        get
+        {
+            return _tilesView[x + y * _width];
+        }
+
+        private set
+        {
+            _tilesView[x + y * _width] = value;
+        }
+
+    }
+
+    public MapTileView this[Vector2Int position] => this[position.x, position.y];
+
     public void Render(Map map)
     {
-        int widthOffset = map.Width / 2;
-        int heightOffset = map.Height / 2;
+        _width = map.Width;
+        _height = map.Height;
 
-        Vector3 positionOffset = new Vector3(Mathf.Floor(map.Width / 2), 0f, Mathf.Floor(map.Height / 2));
+        _tilesView = new MapTileView[_width * _height];
+        
+        Vector3 positionOffset = new Vector3((map.Width - 1) * 0.5f, 0f, (map.Height - 1) * 0.5f);
         Vector3 positionWithOffset = transform.position - positionOffset;
 
         for(int i = 0; i < map.Width; i++)
@@ -23,15 +45,15 @@ public class MapView : MonoBehaviour
 
                 tileView.transform.localPosition = positionWithOffset + new Vector3(i, 0f, j);
                 tileView.transform.SetParent(transform);
+
+                this[i,j] = tileView;
             }
         }
     } 
 
     public void CleanUp()
     {
-        IEnumerable<MapTileView> tilesView = GetComponentsInChildren<MapTileView>(); 
-
-        foreach(MapTileView tileView in tilesView)
+        foreach(MapTileView tileView in _tilesView)
         {
             tileView.Destroy();
         }

@@ -8,19 +8,13 @@ public class MapTileViewFactory : GameObjectFactory<MapTile, MapTileView>
     [SerializeField] private BuildingViewFactory _buildingViewFactory;
     [SerializeField] private MapTileView _mapTileViewPrefab;
 
+    public BuildingViewFactory BuildingViewFactory => _buildingViewFactory;
+    public BiomViewFactory BiomViewFactory => _biomViewFactory;
+
     public override MapTileView Create(MapTile tile)
     {
-        BiomView biomView = _biomViewFactory.Create(tile.Biom);
-
         MapTileView tileView = Instantiate(_mapTileViewPrefab);
-
-        if(tile.Building == null)
-            tileView.Init(this, biomView);
-        else
-        {
-            BuildingView buildingView = _buildingViewFactory.Create(tile.Building);
-            tileView.Init(this, biomView, buildingView);
-        }
+        tileView.Init(this, tile);
 
         return tileView;
     }

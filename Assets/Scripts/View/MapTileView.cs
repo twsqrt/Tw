@@ -3,31 +3,44 @@ using UnityEngine;
 
 public class MapTileView : MonoBehaviour
 {
-    [SerializeField] private Highlighter Highlighter;
+    [SerializeField] private Highlighter _highlighter;
 
     private BiomView _biomView;
     private BuildingView _buildingView;
-
     private MapTileViewFactory _factory;
 
-    public void Init(MapTileViewFactory factory, BiomView biomView )
+    public Highlighter Highlighter => _highlighter;
+
+    public void Init(MapTileViewFactory facotry, MapTile tile)
     {
-        _factory = factory;
-        _biomView = biomView;
+        _factory = facotry;
+        tile.OnBuildingChange += UpdateBuilding;
+
+        _biomView = facotry.BiomViewFactory.Create(tile.Biom);
         SetParentage(_biomView.transform);
+
+        UpdateBuilding(tile.Building);
     }
 
-    public void Init(MapTileViewFactory factory, BiomView biomView, BuildingView buildingView)
+    public void UpdateBuilding(Building building)
     {
-        Init(factory, biomView);
+        _buildingView?.Destroy();
+        if(building != null)
+        {
+            _buildingView = _factory.BuildingViewFactory.Create(building);
+            SetParentage(_buildingView.transform);
+        }
+        else
+        {
+            _buildingView = null;
+        }
 
-        _buildingView =buildingView;
-        SetParentage(_buildingView.transform);
+        _highlighter.MarkToRefresh();
     }
 
     private void SetParentage(Transform child)
     {
-        child.localPosition = transform.localPosition;
+        child.position = transform.position;
         child.SetParent(transform);
     }
 

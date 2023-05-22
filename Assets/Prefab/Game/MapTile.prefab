@@ -59,4 +59,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc114feb194081241941af2096d65b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Highlighter: {fileID: 1148764656854147481}
+  _highlighter: {fileID: 1148764656854147481}

@@ -63,8 +63,8 @@ public class MoveApplyer : MonoBehaviour
         if(_timeFrame.TryApplyPlayerMove(move))
         {
             ApplyGameProcesses();
-            _mapView.CleanUp();
-            _mapView.Render(_map);
+            //_mapView.CleanUp();
+            //_mapView.Render(_map);
         }
 
         _playerMoveBuilder.Player = _players.Next();

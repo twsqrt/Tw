@@ -14,6 +14,8 @@ public class MapTile
     private Building _building;
     private Biom _biom;
 
+    public Action<Building> OnBuildingChange;
+
     public MapTile(Vector2Int positionOnMap, Biom biom)
     {
         _positionOnMap = positionOnMap;
@@ -31,6 +33,7 @@ public class MapTile
         set
         {
             _building = value;
+            OnBuildingChange?.Invoke(_building);
         }
     }
 

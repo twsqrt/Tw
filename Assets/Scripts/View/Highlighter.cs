@@ -14,14 +14,14 @@ public class Highlighter : MonoBehaviour
 
     private List<(MeshRenderer, Color)> _defaultColors = new List<(MeshRenderer, Color)>();
     private bool _isHighlighteEnable = false;
-    private bool _shouldUpdateDefaultColorsList = false;
+    private bool _shouldRefresh = false;
 
-    public void MarkForUpdateDefaultColorsList()
+    public void MarkToRefresh()
     {
-        _shouldUpdateDefaultColorsList = true;
+        _shouldRefresh = true;
     }
 
-    private void UpdateDefaultColorsList()
+    public void Refresh()
     {
         _defaultColors.Clear();
 
@@ -36,10 +36,10 @@ public class Highlighter : MonoBehaviour
         if (_isHighlighteEnable) 
             return;
 
-        if (_shouldUpdateDefaultColorsList)
+        if(_shouldRefresh)
         {
-            _shouldUpdateDefaultColorsList = false;
-            UpdateDefaultColorsList();
+            _shouldRefresh = false;
+            Refresh();
         }
 
         _isHighlighteEnable = true;
