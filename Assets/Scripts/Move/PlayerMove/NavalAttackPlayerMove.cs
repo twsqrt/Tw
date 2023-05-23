@@ -12,14 +12,14 @@ public class NavalAttackPlayerMove : PlayerMove, ICoordinateMove
 
     public NavalAttackPlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) {}
 
-    public override bool IsValidMove(Map map, PlayerStates playerStates)
+    public override bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
-        MapTile tile = map[Coordinates];
+        ReadOnlyMapTile tile = map[Coordinates];
 
         if (tile.Building == null || tile.Building.Owner == Creator)
             return false;
 
-        IEnumerable<MapTile> tileVicinityRadius2 = map.GetVicinity(Coordinates, 2);
+        IEnumerable<ReadOnlyMapTile> tileVicinityRadius2 = map.GetVicinity(Coordinates, 2);
         return tileVicinityRadius2.Any(t => t.Biom.Type == BiomType.Ocean);
     }
 

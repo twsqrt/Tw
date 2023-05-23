@@ -16,15 +16,15 @@ public class PlacePlayerMove : PlayerMove, ICoordinateMove, IBuildingMove
 
     public PlacePlayerMove(Player creator) : base(creator, MoveParameters.Coordinate | MoveParameters.Building) { }
 
-    public override bool IsValidMove(Map map, PlayerStates playerStates)
+    public override bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
-        MapTile tile = map[Coordinates];
+        ReadOnlyMapTile tile = map[Coordinates];
 
         if (tile.Building != null || tile.Biom.IsBuildingAllowed == false) 
             return false;
 
-        IEnumerable<MapTile> vicinityRadius1 = map.GetVicinity(tile.PositionOnMap, 1);
-        IEnumerable<MapTile> vicinityRadius2 = map.GetVicinity(tile.PositionOnMap, 2);
+        IEnumerable<ReadOnlyMapTile> vicinityRadius1 = map.GetVicinity(tile.PositionOnMap, 1);
+        IEnumerable<ReadOnlyMapTile> vicinityRadius2 = map.GetVicinity(tile.PositionOnMap, 2);
 
         return vicinityRadius1.Any(t => t.Building != null && t.Building.Owner != Creator) == false
             && vicinityRadius2.Any(t => t.Building != null && t.Building.Owner == Creator);

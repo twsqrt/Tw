@@ -12,16 +12,17 @@ public class AirStrikePlayerMove : PlayerMove, ICoordinateMove
 
     public AirStrikePlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) { }
 
-    public override bool IsValidMove(Map map, PlayerStates playerStates)
+    public override bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
-        MapTile tile = map[Coordinates];
+        ReadOnlyMapTile tile = map[Coordinates];
 
         if (tile.Building == null || tile.Building.Owner == Creator)
             return false;
 
-        IEnumerable<MapTile> tileVicinityRadius1 = map.GetVicinity(Coordinates, 1);
+        IEnumerable<ReadOnlyMapTile> tileVicinityRadius1 = map.GetVicinity(Coordinates, 1);
         return tileVicinityRadius1.Any(t => t.Biom.IsAirBarrier) == false;
     }
+
     public override void Execute(Map map, PlayerStates playerStates)
     {
         map[Coordinates].Building = null;

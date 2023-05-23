@@ -52,7 +52,10 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (_mapView.TryGetPositionOnMap(ray, out Vector2Int positionOnMap) && _coordinateMove.IsValidCoordinate(positionOnMap, _currentMapClone, _currentPlayerStatesClone))
+            ReadOnlyMap map = _currentGameState.Map;
+            ReadOnlyPlayerStates playerStates = _currentGameState.PlayerStates;
+
+            if (_mapView.TryGetPositionOnMap(ray, out Vector2Int positionOnMap) && _coordinateMove.IsValidCoordinate(positionOnMap, map, playerStates))
             {
                 _coordinateMove.Coordinates = positionOnMap;
                 Exit();

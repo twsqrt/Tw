@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class ICoodinateMoveExtension
 {
-    public static bool IsValidCoordinate(this ICoordinateMove move, Vector2Int coordinate, Map map, PlayerStates playerStates)
+    public static bool IsValidCoordinate(this ICoordinateMove move, Vector2Int coordinate, ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
         Vector2Int currentCoordinate = move.Coordinates;
         move.Coordinates = coordinate;
@@ -16,11 +16,11 @@ public static class ICoodinateMoveExtension
         return isValid;
     }
 
-    public static IEnumerable<Vector2Int> GetAllValidCoordinate(this ICoordinateMove move, Map map, PlayerStates playerStates)
+    public static IEnumerable<Vector2Int> GetAllValidCoordinate(this ICoordinateMove move, ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
         Vector2Int currentCoordinate = move.Coordinates;
 
-        foreach(MapTile tile in map.Tiles)
+        foreach(ReadOnlyMapTile tile in map.Tiles)
         {
             Vector2Int tilePosition = tile.PositionOnMap;
             move.Coordinates = tilePosition;

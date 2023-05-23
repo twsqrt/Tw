@@ -12,11 +12,12 @@ public class ArtilleryPlayerMove : PlayerMove, ICoordinateMove
 
     public ArtilleryPlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) { }
 
-    public override bool IsValidMove(Map map, PlayerStates playerStates)
+    public override bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
-        MapTile tile = map[Coordinates];
+        ReadOnlyMapTile tile = map[Coordinates];
         return tile.Building != null && tile.Building.Owner != Creator;
     }
+
     public override void Execute(Map map, PlayerStates playerStates)
     {
         map[Coordinates].Building = null;

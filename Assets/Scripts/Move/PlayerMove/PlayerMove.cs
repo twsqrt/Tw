@@ -24,5 +24,5 @@ public abstract class PlayerMove : IMove
 
     public abstract void Execute(Map map, PlayerStates playerStates); 
 
-    public abstract bool IsValidMove(Map map, PlayerStates playerStates); 
+    public abstract bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates); 
 }

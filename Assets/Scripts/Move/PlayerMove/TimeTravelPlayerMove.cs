@@ -8,16 +8,16 @@ public class TimeTravelPlayerMove : PlayerMove, IResoucesMove, ITimeMove
 
     public TimeTravelPlayerMove(Player creator) : base(creator, MoveParameters.Resources | MoveParameters.Time) {}
 
+    public override bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
+    {
+        ReadOnlyPlayerState CreatorState = playerStates.GetPlayerState(Creator);
+
+        return CreatorState.Resources.IsEnoughTo(Resources);
+    }
+
     public override void Execute(Map map, PlayerStates playerStates)
     {
         PlayerState CreatorState = playerStates.GetPlayerState(Creator);
         CreatorState.Resources -= Resources;
-    }
-
-    public override bool IsValidMove(Map map, PlayerStates playerStates)
-    {
-        PlayerState CreatorState = playerStates.GetPlayerState(Creator);
-
-        return CreatorState.Resources.IsEnoughTo(Resources);
     }
 }

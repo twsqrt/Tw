@@ -44,7 +44,7 @@ public class GameState
     {
         PlayerState creatorState = _playerStates.GetPlayerState(move.Creator);
 
-        return creatorState.Resources.IsEnoughTo(move.Cost) && move.IsValidMove(_map, _playerStates);
+        return creatorState.Resources.IsEnoughTo(move.Cost) && move.IsValidMove(_map.AsReadOnly(), _playerStates.AsReadOnly());
     }
 
     public void ApplyPlayerMove(PlayerMove move)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public abstract class GameProcess : IMove
 {
-    public bool IsValidMove(Map map, PlayerStates playerStates)
+    public bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
         return true;
     }

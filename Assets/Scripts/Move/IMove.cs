@@ -7,6 +7,6 @@ public interface IMove
 {
     void Execute(Map map, PlayerStates playerStates);
 
-    bool IsValidMove(Map map, PlayerStates playerStates);
+    bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates);
 }
 

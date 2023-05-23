@@ -13,14 +13,14 @@ public class RemovePlayerMove : PlayerMove, ICoordinateMove
 
     public RemovePlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) { }
 
-    public override bool IsValidMove(Map map, PlayerStates playerStates)
+    public override bool IsValidMove(ReadOnlyMap map, ReadOnlyPlayerStates playerStates)
     {
-        IEnumerable<MapTile> allValidTiles = map.Tiles.Where( t => t.Building != null && t.Building.Owner == Creator);
+        IEnumerable<ReadOnlyMapTile> allValidTiles = map.Tiles.Where( t => t.Building != null && t.Building.Owner == Creator);
 
         if(allValidTiles.Count() < 2)
             return false;
 
-        MapTile selectedTile = map[Coordinates];
+        ReadOnlyMapTile selectedTile = map[Coordinates];
 
         return allValidTiles.Any( t => t == selectedTile);
     }
