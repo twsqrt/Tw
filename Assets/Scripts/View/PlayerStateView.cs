@@ -8,11 +8,11 @@ using UnityEngine;
 
 public class PlayerStateView : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] private TextMeshProUGUI _textMesh;
 
     public void Init(PlayerState playerState)
     {
-        textMeshProUGUI.color = playerState.Player.Color;
+        _textMesh.color = playerState.Player.Color;
         playerState.OnPlayerDataChanged += Render;
 
         Render(playerState);
@@ -24,6 +24,6 @@ public class PlayerStateView : MonoBehaviour
         sb.AppendLine($"Player: {playerState.Player.Name}");
         sb.AppendLine($"Resources: {playerState.Resources}");
 
-        textMeshProUGUI.text = sb.ToString();
+        _textMesh.text = sb.ToString();
     }
 }

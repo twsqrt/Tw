@@ -18,4 +18,4 @@ MonoBehaviour:
     Coal: 10
     Oil: 2
   _isMinesResources: 1
-  _prefab: {fileID: 8647467925552739476, guid: d00d0c5dd2478a54abce3c2e897597ff, type: 3}
+  _prefab: {fileID: 2259779249424479633, guid: d00d0c5dd2478a54abce3c2e897597ff, type: 3}

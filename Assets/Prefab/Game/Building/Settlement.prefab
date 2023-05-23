@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8598869712082505650}
   - component: {fileID: -2636172532934305611}
-  - component: {fileID: 8647467925552739476}
+  - component: {fileID: 2259779249424479633}
   m_Layer: 0
   m_Name: Settlement
   m_TagString: Untagged
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61be7cdf17ae76d4f8fabea0a71a4cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8647467925552739476
+--- !u!114 &2259779249424479633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5651933190465151018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1437a354412a17e429a8d6375161cf30, type: 3}
+  m_Script: {fileID: 11500000, guid: d93083bda386997469d1c4f3e7fa7f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _colorSetter: {fileID: -2636172532934305611}

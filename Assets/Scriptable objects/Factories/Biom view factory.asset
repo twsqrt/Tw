@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4a394b63c61fb7429aecb2ffe636779, type: 3}
+  m_Script: {fileID: 11500000, guid: 0303de6c048815b4a9d0d991a4f24c29, type: 3}
   m_Name: Biom view factory
   m_EditorClassIdentifier: 

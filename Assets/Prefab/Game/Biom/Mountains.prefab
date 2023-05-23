@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 457299231650871216}
-  - component: {fileID: 4343497012909072384}
+  - component: {fileID: 2570382117928485421}
   m_Layer: 0
   m_Name: Mountains
   m_TagString: Untagged
@@ -123,7 +123,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4343497012909072384
+--- !u!114 &2570382117928485421
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5259085055503690809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e052251b187c5844898374c99feb01a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f323363c86313f4bb5a939043ed2ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1057351233810600773

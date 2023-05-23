@@ -29,7 +29,7 @@ public class MapView : MonoBehaviour
 
     public MapTileView this[Vector2Int position] => this[position.x, position.y];
 
-    public void Render(Map map)
+    public void Render(ReadOnlyMap map)
     {
         _width = map.Width;
         _height = map.Height;

@@ -11,7 +11,7 @@ public class MapTileView : MonoBehaviour
 
     public Highlighter Highlighter => _highlighter;
 
-    public void Init(MapTileViewFactory facotry, MapTile tile)
+    public void Init(MapTileViewFactory facotry, ReadOnlyMapTile tile)
     {
         _factory = facotry;
         tile.OnBuildingChange += UpdateBuilding;

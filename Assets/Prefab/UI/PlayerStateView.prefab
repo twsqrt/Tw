@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7af80966a64974fa7bf576cc987130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMeshProUGUI: {fileID: 2582407034509238198}
+  _textMesh: {fileID: 2582407034509238198}
 --- !u!114 &2074621892751854994
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3090650656351817505}
   - component: {fileID: 1148764656854147481}
-  - component: {fileID: 2207054874527255825}
+  - component: {fileID: 2462712247721871001}
   m_Layer: 0
   m_Name: MapTile
   m_TagString: Untagged
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _highlightColor: {r: 0, g: 0, b: 0, a: 1}
   _colorAdditionCoefficient: 0.3
---- !u!114 &2207054874527255825
+--- !u!114 &2462712247721871001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4412966153697389505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc114feb194081241941af2096d65b54, type: 3}
+  m_Script: {fileID: 11500000, guid: ebb4e3b0b6b682545a2428cb5cfb7381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _highlighter: {fileID: 1148764656854147481}

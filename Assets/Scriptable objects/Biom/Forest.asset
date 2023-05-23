@@ -19,4 +19,4 @@ MonoBehaviour:
     Wood: 4
     Coal: 2
     Oil: 1
-  _prefab: {fileID: 8438545390617045397, guid: 57c341ec2a04e364e96cf7af6e5ad37c, type: 3}
+  _prefab: {fileID: 2488100931980519145, guid: 57c341ec2a04e364e96cf7af6e5ad37c, type: 3}

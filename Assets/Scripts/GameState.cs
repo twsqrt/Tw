@@ -7,9 +7,10 @@ public class GameState
     private int _time;
     public int Time => _time;
 
-    //template solution
     public ReadOnlyMap Map => _map.AsReadOnly();
     public ReadOnlyPlayerStates PlayerStates => _playerStates.AsReadOnly();
+
+    public event Action<GameState> OnPlayerMoveApplied;
 
     public GameState(Map map, PlayerStates playersState)
     {
@@ -55,6 +56,8 @@ public class GameState
         creatorState.Resources -= move.Cost;
 
         _time++;
+
+        OnPlayerMoveApplied?.Invoke(this);
     }
 
     public bool TryApplyPlayerMove(PlayerMove move)

@@ -13,6 +13,7 @@ public class MoveApplyer : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Player[] _players;
     [SerializeField] private PlayerStatesView _playerStatesView;
+    [SerializeField] private GameStateSelector _gameStateSelector;
     [SerializeField] private PlayerMoveBuilder _playerMoveBuilder;
 
     //template solution
@@ -25,25 +26,27 @@ public class MoveApplyer : MonoBehaviour
     //template solution
     private GameState _currentGameState;
     public GameState CurrentGameState => _currentGameState;
-
     private void Start()
     {
         PlayerStates playerStates = new PlayerStates(_players);
         _playresRingArray = new RingArray<Player>(_players);
 
-        //template soluion
         Map initialMap = new Map(_mapConfiguration);
 
+        //template soluion
         initialMap[4,0].Building = new Building(_settlement, _playresRingArray[0]);
         initialMap[initialMap.Width - 3, initialMap.Height - 1].Building = new Building(_settlement, _playresRingArray[1]);
 
         _currentGameState = new GameState(initialMap, playerStates);
 
-        _mapView.Render(initialMap);
+        _gameStateSelector.Init(new GameState[]{ _currentGameState, _currentGameState.Clone() } );
+        _gameStateSelector.AddListener(GameStateSelectedHandler);
+
+        _mapView.Render(initialMap.AsReadOnly());
 
         _playerMoveBuilder.Init();
         _playerMoveBuilder.Player = _playresRingArray.GetCurrent();
-        _playerMoveBuilder.OnMoveBuilt += OnPlayerMoveCreated;
+        _playerMoveBuilder.OnMoveBuilt += PlayerMoveCreatedHandler;
 
         _playerStatesView.Init(playerStates);
 
@@ -58,7 +61,7 @@ public class MoveApplyer : MonoBehaviour
         }
     }
 
-    public void OnPlayerMoveCreated(PlayerMove move)
+    public void PlayerMoveCreatedHandler(PlayerMove move)
     {
         if(_currentGameState.TryApplyPlayerMove(move))
         {
@@ -66,5 +69,16 @@ public class MoveApplyer : MonoBehaviour
         }
 
         _playerMoveBuilder.Player = _playresRingArray.Next();
+    }
+
+    public void GameStateSelectedHandler(GameState gameState)
+    {
+        if(_currentGameState != gameState)
+        {
+            _currentGameState = gameState;
+
+            _mapView.CleanUp();
+            _mapView.Render(_currentGameState.Map);
+        }
     }
 }

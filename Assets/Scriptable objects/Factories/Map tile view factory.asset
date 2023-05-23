@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800971b898544f242944fc18aa7ef3d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d648bfc939594f48af007a7ac0f2da8, type: 3}
   m_Name: Map tile view factory
   m_EditorClassIdentifier: 
   _biomViewFactory: {fileID: 11400000, guid: 42d33c191246ee546a1465bf60bcca83, type: 2}
   _buildingViewFactory: {fileID: 11400000, guid: e898499705ccc4a4faf50dba0f342622, type: 2}
-  _mapTileViewPrefab: {fileID: 2207054874527255825, guid: 9ee1464e02462c540bd6436f65b804a7, type: 3}
+  _mapTileViewPrefab: {fileID: 2462712247721871001, guid: 9ee1464e02462c540bd6436f65b804a7, type: 3}
