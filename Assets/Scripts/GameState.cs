@@ -8,8 +8,8 @@ public class GameState
     public int Time => _time;
 
     //template solution
-    public Map MapClone => _map.Clone();
-    public PlayerStates PlayerStatesClone => _playerStates.Clone();
+    public ReadOnlyMap Map => _map.AsReadOnly();
+    public ReadOnlyPlayerStates PlayerStates => _playerStates.AsReadOnly();
 
     public GameState(Map map, PlayerStates playersState)
     {

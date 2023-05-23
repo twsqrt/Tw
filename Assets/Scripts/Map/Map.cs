@@ -7,12 +7,11 @@ public class Map
     private MapConfiguration _configuration;
     private int _width;
     private int _height;
-
     private MapTile[] _tiles;
-    public IEnumerable<MapTile> Tiles => _tiles;
 
     public int Width => _width;
     public int Height => _height;
+    public IEnumerable<MapTile> Tiles => _tiles;
 
     public MapTile this[int x, int y]
     {
@@ -26,7 +25,7 @@ public class Map
         }
     }
 
-    public MapTile this[Vector2Int coords] => this[coords.x, coords.y];
+    public MapTile this[Vector2Int position] => this[position.x, position.y];
 
     private bool IsValidCoordinates(int x, int y)
     {
@@ -76,6 +75,11 @@ public class Map
         return new Map(this);
     }
 
+    public ReadOnlyMap AsReadOnly()
+    {
+        return new ReadOnlyMap(this);
+    }
+
     private void GenerateMap(BiomFactory biomFactory)
     {
         _tiles = new MapTile[_width * _height];
@@ -93,7 +97,7 @@ public class Map
     }
 
 
-    public IEnumerable<MapTile> GetVicinity(Vector2Int positionOnMap, int radius = 1)
+    public IEnumerable<MapTile> GetVicinity(Vector2Int positionOnMap, int radius)
     {
         for(int i = -radius; i <= radius; i++)
         {

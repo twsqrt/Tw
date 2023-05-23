@@ -11,7 +11,7 @@ public class PlayerState
     private Player _player;
     private GameResources _resources;
 
-    public Action<PlayerState> OnPlayerDataChanged;
+    public event Action<PlayerState> OnPlayerDataChanged;
     public Player Player => _player;
 
     public GameResources Resources
@@ -44,4 +44,9 @@ public class PlayerState
     {
         return new PlayerState(this);
     } 
+
+    public ReadOnlyPlayerState AsReadOnly()
+    {
+        return new ReadOnlyPlayerState(this);
+    }
 }

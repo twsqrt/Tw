@@ -22,15 +22,18 @@ public class PlayerStates
         _playerStates = original._playerStates.Values.Select(s => s.Clone()).ToDictionary(s => s.Player);
     }
 
-    public PlayerStates Clone()
-    {
-        return new PlayerStates(this);
-    }
-
-
     public PlayerState GetPlayerState(Player player)
     {
         return _playerStates[player];
     }
 
+    public PlayerStates Clone()
+    {
+        return new PlayerStates(this);
+    }
+
+    public ReadOnlyPlayerStates AsReadOnly()
+    {
+        return new ReadOnlyPlayerStates(this);
+    }
 }

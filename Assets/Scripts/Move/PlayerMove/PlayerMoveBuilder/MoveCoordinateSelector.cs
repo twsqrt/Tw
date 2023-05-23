@@ -14,17 +14,12 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
     private IEnumerable<Highlighter> _highlighters;
 
     private GameState _currentGameState;
-    private Map _currentMapClone;
-    private PlayerStates _currentPlayerStatesClone;
-
     protected override void AfterStart(ICoordinateMove coordinateMove)
     {
         _coordinateMove = coordinateMove;
         _currentGameState = _moveApplyer.CurrentGameState;
-        _currentMapClone = _currentGameState.MapClone;
-        _currentPlayerStatesClone = _currentGameState.PlayerStatesClone;
 
-        _highlighters = _coordinateMove.GetAllValidCoordinate(_currentMapClone, _currentPlayerStatesClone).Select(p => _mapView[p].Highlighter);
+        _highlighters = _coordinateMove.GetAllValidCoordinate(_currentGameState.Map, _currentGameState.PlayerStates).Select(p => _mapView[p].Highlighter);
 
         HighlightersEnable();
     }

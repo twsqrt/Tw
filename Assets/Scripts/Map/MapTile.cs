@@ -39,6 +39,11 @@ public class MapTile
         return new MapTile(this);
     }
 
+    public ReadOnlyMapTile AsReadOnly()
+    {
+        return new ReadOnlyMapTile(this);
+    }
+
     public Building Building
     {
         get
