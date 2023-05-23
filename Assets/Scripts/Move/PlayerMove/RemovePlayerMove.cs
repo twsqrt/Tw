@@ -11,26 +11,27 @@ public class RemovePlayerMove : PlayerMove, ICoordinateMove
     public Vector2Int Coordinates { get; set; }
     public override GameResources Cost => GameResources.zero;
 
-    public RemovePlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate) { }
+    public RemovePlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) { }
 
-    public override bool IsValidMove(Map map)
+    public override bool IsValidMove(Map map, PlayerStates playerStates)
     {
-        //template soulution
-        if(map.Tiles.Where( t => t.Building != null && t.Building.Owner == Player).Count() < 2)
+        IEnumerable<MapTile> allValidTiles = map.Tiles.Where( t => t.Building != null && t.Building.Owner == Creator);
+
+        if(allValidTiles.Count() < 2)
             return false;
 
-        MapTile tile = map[Coordinates];
+        MapTile selectedTile = map[Coordinates];
 
-        return tile != null && tile.Building != null && tile.Building.Owner == _player;
+        return allValidTiles.Any( t => t == selectedTile);
     }
 
-    public override void Execute(Map map)
+    public override void Execute(Map map, PlayerStates playerStates)
     {
         MapTile tile = map[Coordinates];
-
         GameResources buildingCost = tile.Building.Info.Cost;
 
-        _player.Resources += buildingCost * 0.5f;
+        PlayerState CreatorState = playerStates.GetPlayerState(Creator);
+        CreatorState.Resources += buildingCost * 0.5f;
 
         tile.Building = null;
     }

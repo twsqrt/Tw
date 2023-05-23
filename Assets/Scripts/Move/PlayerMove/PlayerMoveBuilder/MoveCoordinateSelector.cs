@@ -15,14 +15,16 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
 
     private GameState _currentGameState;
     private Map _currentMapClone;
+    private PlayerStates _currentPlayerStatesClone;
 
     protected override void AfterStart(ICoordinateMove coordinateMove)
     {
         _coordinateMove = coordinateMove;
         _currentGameState = _moveApplyer.CurrentGameState;
         _currentMapClone = _currentGameState.MapClone;
+        _currentPlayerStatesClone = _currentGameState.PlayerStatesClone;
 
-        _highlighters = _coordinateMove.GetAllValidCoordinate(_currentMapClone).Select(p => _mapView[p].Highlighter);
+        _highlighters = _coordinateMove.GetAllValidCoordinate(_currentMapClone, _currentPlayerStatesClone).Select(p => _mapView[p].Highlighter);
 
         HighlightersEnable();
     }
@@ -55,7 +57,7 @@ public class MoveCoordinateSelector : ParameterSelector<ICoordinateMove>
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (_mapView.TryGetPositionOnMap(ray, out Vector2Int positionOnMap) && _coordinateMove.IsValidCoordinate(positionOnMap, _currentMapClone))
+            if (_mapView.TryGetPositionOnMap(ray, out Vector2Int positionOnMap) && _coordinateMove.IsValidCoordinate(positionOnMap, _currentMapClone, _currentPlayerStatesClone))
             {
                 _coordinateMove.Coordinates = positionOnMap;
                 Exit();

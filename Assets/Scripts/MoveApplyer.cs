@@ -12,7 +12,7 @@ public class MoveApplyer : MonoBehaviour
     [SerializeField] private MapView _mapView;
     [SerializeField] private Camera _camera;
     [SerializeField] private Player[] _players;
-    [SerializeField] private PlayersStateView _playersStateView;
+    [SerializeField] private PlayerStatesView _playerStatesView;
     [SerializeField] private PlayerMoveBuilder _playerMoveBuilder;
 
     //template solution
@@ -20,34 +20,34 @@ public class MoveApplyer : MonoBehaviour
 
     private GameProcess[] _gameProcesses; 
 
-    private RingArray<PlayerState> _playersState;
+    private RingArray<Player> _playresRingArray;
 
     //template solution
     private GameState _currentGameState;
-
     public GameState CurrentGameState => _currentGameState;
+
     private void Start()
     {
-        _playersState = new RingArray<PlayerState>(_players.Select(p => new PlayerState(p)));
+        PlayerStates playerStates = new PlayerStates(_players);
+        _playresRingArray = new RingArray<Player>(_players);
 
         //template soluion
         Map initialMap = new Map(_mapConfiguration);
 
-        initialMap[4,0].Building = new Building(_settlement, _playersState[0]);
-        initialMap[initialMap.Width - 3, initialMap.Height - 1].Building = new Building(_settlement, _playersState[1]);
+        initialMap[4,0].Building = new Building(_settlement, _playresRingArray[0]);
+        initialMap[initialMap.Width - 3, initialMap.Height - 1].Building = new Building(_settlement, _playresRingArray[1]);
 
-        _currentGameState = new GameState(initialMap);
+        _currentGameState = new GameState(initialMap, playerStates);
 
         _mapView.Render(initialMap);
 
         _playerMoveBuilder.Init();
-        _playerMoveBuilder.Player = _playersState.GetCurrent();
+        _playerMoveBuilder.Player = _playresRingArray.GetCurrent();
         _playerMoveBuilder.OnMoveBuilt += OnPlayerMoveCreated;
 
-        _playersStateView.Init(_playersState.ToArray());
+        _playerStatesView.Init(playerStates);
 
         _gameProcesses = new GameProcess[] { new ResourceExtractionProcess() };
-
     }
 
     private void ApplyGameProcesses()
@@ -65,6 +65,6 @@ public class MoveApplyer : MonoBehaviour
             ApplyGameProcesses();
         }
 
-        _playerMoveBuilder.Player = _playersState.Next();
+        _playerMoveBuilder.Player = _playresRingArray.Next();
     }
 }

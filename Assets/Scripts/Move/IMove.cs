@@ -5,8 +5,8 @@ using UnityEngine.Tilemaps;
 
 public interface IMove
 {
-    void Execute(Map map);
+    void Execute(Map map, PlayerStates playerStates);
 
-    bool IsValidMove(Map map);
+    bool IsValidMove(Map map, PlayerStates playerStates);
 }
 

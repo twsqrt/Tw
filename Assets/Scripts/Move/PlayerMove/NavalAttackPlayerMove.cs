@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +10,20 @@ public class NavalAttackPlayerMove : PlayerMove, ICoordinateMove
     public Vector2Int Coordinates { get; set; }
     public override GameResources Cost => new GameResources(1, 2, 3);
 
-    public NavalAttackPlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate) {}
+    public NavalAttackPlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) {}
 
-    public override bool IsValidMove(Map map)
+    public override bool IsValidMove(Map map, PlayerStates playerStates)
     {
         MapTile tile = map[Coordinates];
 
-        if (tile == null || tile.Building == null || tile.Building.Owner == _player)
+        if (tile.Building == null || tile.Building.Owner == Creator)
             return false;
 
         IEnumerable<MapTile> tileVicinityRadius2 = map.GetVicinity(Coordinates, 2);
         return tileVicinityRadius2.Any(t => t.Biom.Type == BiomType.Ocean);
     }
 
-    public override void Execute(Map map)
+    public override void Execute(Map map, PlayerStates playerStates)
     {
         map[Coordinates].Building = null;
     }

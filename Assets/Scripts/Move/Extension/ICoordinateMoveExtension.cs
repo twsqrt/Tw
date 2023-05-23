@@ -5,18 +5,18 @@ using UnityEngine;
 
 public static class ICoodinateMoveExtension
 {
-    public static bool IsValidCoordinate(this ICoordinateMove move, Vector2Int coordinate, Map map)
+    public static bool IsValidCoordinate(this ICoordinateMove move, Vector2Int coordinate, Map map, PlayerStates playerStates)
     {
         Vector2Int currentCoordinate = move.Coordinates;
         move.Coordinates = coordinate;
 
-        bool isValid = move.IsValidMove(map);
+        bool isValid = move.IsValidMove(map, playerStates);
 
         move.Coordinates = currentCoordinate;
         return isValid;
     }
 
-    public static IEnumerable<Vector2Int> GetAllValidCoordinate(this ICoordinateMove move, Map map)
+    public static IEnumerable<Vector2Int> GetAllValidCoordinate(this ICoordinateMove move, Map map, PlayerStates playerStates)
     {
         Vector2Int currentCoordinate = move.Coordinates;
 
@@ -24,7 +24,7 @@ public static class ICoodinateMoveExtension
         {
             Vector2Int tilePosition = tile.PositionOnMap;
             move.Coordinates = tilePosition;
-            if(move.IsValidMove(map))
+            if(move.IsValidMove(map, playerStates))
             {
                 yield return tilePosition;
             }

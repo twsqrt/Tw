@@ -6,19 +6,18 @@ public class TimeTravelPlayerMove : PlayerMove, IResoucesMove, ITimeMove
     public int Time { get; set;}
     public override GameResources Cost => Time * new GameResources(2,2,2);
 
-    public TimeTravelPlayerMove(PlayerState player) : base(player, MoveParameters.Resources | MoveParameters.Time)
+    public TimeTravelPlayerMove(Player creator) : base(creator, MoveParameters.Resources | MoveParameters.Time) {}
+
+    public override void Execute(Map map, PlayerStates playerStates)
     {
-        //template solution
-        Time = 0;
+        PlayerState CreatorState = playerStates.GetPlayerState(Creator);
+        CreatorState.Resources -= Resources;
     }
 
-    public override void Execute(Map map)
+    public override bool IsValidMove(Map map, PlayerStates playerStates)
     {
-        _player.Resources -= Resources;
-    }
+        PlayerState CreatorState = playerStates.GetPlayerState(Creator);
 
-    public override bool IsValidMove(Map map)
-    {
-        return _player.Resources.IsEnough(Resources);
+        return CreatorState.Resources.IsEnoughTo(Resources);
     }
 }

@@ -220,8 +220,8 @@ RectTransform:
   - {fileID: 1992388372}
   - {fileID: 176972530}
   - {fileID: 1977852608}
-  - {fileID: 711963660}
   - {fileID: 1360280156}
+  - {fileID: 711963660}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1632,7 +1632,7 @@ RectTransform:
   - {fileID: 474520419}
   - {fileID: 770033272}
   m_Father: {fileID: 35715291}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3498,7 +3498,7 @@ RectTransform:
   m_Children:
   - {fileID: 355187443}
   m_Father: {fileID: 35715291}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -4851,7 +4851,7 @@ GameObject:
   - component: {fileID: 1719701938}
   - component: {fileID: 1719701940}
   m_Layer: 5
-  m_Name: Players view
+  m_Name: Player states view
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4925,10 +4925,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1719701936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ac513f8713dcd4396b89a6750f3790, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f438cfbce82cbc49a4f4d649f2aa487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerViewPrefab: {fileID: 2728518501119302732, guid: 3396aea5fee236d4ead5f065174cdc7d, type: 3}
+  _playerStateViewPrefab: {fileID: 2728518501119302732, guid: 3396aea5fee236d4ead5f065174cdc7d, type: 3}
   _container: {fileID: 395368539}
 --- !u!1 &1765714101
 GameObject:
@@ -6014,7 +6014,7 @@ GameObject:
   - component: {fileID: 2071672845}
   - component: {fileID: 2071672844}
   m_Layer: 0
-  m_Name: MoveApplyer
+  m_Name: Move applyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6035,10 +6035,10 @@ MonoBehaviour:
   _mapConfiguration: {fileID: 11400000, guid: 6f1e3bbd2c0fb8c4eb58c985005e5611, type: 2}
   _mapView: {fileID: 644076045}
   _camera: {fileID: 963194227}
-  _playersInfo:
+  _players:
   - {fileID: 11400000, guid: 9b2f8a294033d5b46b7c5311de9db10d, type: 2}
   - {fileID: 11400000, guid: 407b134b38c025a4ebb1f9a758f02d0f, type: 2}
-  _playersView: {fileID: 1719701940}
+  _playerStatesView: {fileID: 1719701940}
   _playerMoveBuilder: {fileID: 1765714105}
   _settlement: {fileID: 11400000, guid: 3ae7c9e014aa556488f35a18b08c1b9a, type: 2}
 --- !u!4 &2071672845

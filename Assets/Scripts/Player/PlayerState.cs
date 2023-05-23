@@ -9,7 +9,7 @@ using UnityEngine;
 public class PlayerState
 {
     private Player _player;
-    private GameResources _resources = new GameResources(100, 100, 100);
+    private GameResources _resources;
 
     public Action<PlayerState> OnPlayerDataChanged;
     public Player Player => _player;
@@ -28,8 +28,20 @@ public class PlayerState
         }
     }
 
-    public PlayerState(Player player)
+    public PlayerState(Player player, GameResources resources)
     {
         _player = player;
+        _resources = resources;
     }
+
+    private PlayerState(PlayerState original)
+    {
+        _player = original.Player;
+        _resources = original.Resources;
+    }
+
+    public PlayerState Clone()
+    {
+        return new PlayerState(this);
+    } 
 }

@@ -10,20 +10,19 @@ public class AirStrikePlayerMove : PlayerMove, ICoordinateMove
     public Vector2Int Coordinates {get; set;}
     public override GameResources Cost => new GameResources(5, 2, 2);
 
-    public AirStrikePlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate) { }
+    public AirStrikePlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) { }
 
-    public override bool IsValidMove(Map map)
+    public override bool IsValidMove(Map map, PlayerStates playerStates)
     {
         MapTile tile = map[Coordinates];
 
-        if (tile == null || tile.Building == null || tile.Building.Owner == _player)
+        if (tile.Building == null || tile.Building.Owner == Creator)
             return false;
 
         IEnumerable<MapTile> tileVicinityRadius1 = map.GetVicinity(Coordinates, 1);
-
         return tileVicinityRadius1.Any(t => t.Biom.IsAirBarrier) == false;
     }
-    public override void Execute(Map map)
+    public override void Execute(Map map, PlayerStates playerStates)
     {
         map[Coordinates].Building = null;
     }

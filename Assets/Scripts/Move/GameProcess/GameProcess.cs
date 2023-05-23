@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 public abstract class GameProcess : IMove
 {
-    public bool IsValidMove(Map map)
+    public bool IsValidMove(Map map, PlayerStates playerStates)
     {
         return true;
     }
 
-    public abstract void Execute(Map map);
+    public abstract void Execute(Map map, PlayerStates playerStates);
 }

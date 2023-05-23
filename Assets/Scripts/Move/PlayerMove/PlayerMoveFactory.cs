@@ -2,22 +2,22 @@ using System;
 
 public static class PlayerMoveFactory
 {
-    public static PlayerMove Create(PlayerMoveType type, PlayerState player)
+    public static PlayerMove Create(PlayerMoveType type, Player creator)
     {
         switch(type)
         {
             case PlayerMoveType.Place:
-                return new PlacePlayerMove(player);
+                return new PlacePlayerMove(creator);
             case PlayerMoveType.Remove:
-                return new RemovePlayerMove(player);
+                return new RemovePlayerMove(creator);
             case PlayerMoveType.NavalAttack:
-                return new NavalAttackPlayerMove(player);
+                return new NavalAttackPlayerMove(creator);
             case PlayerMoveType.AirStrike:
-                return new AirStrikePlayerMove(player);
+                return new AirStrikePlayerMove(creator);
             case PlayerMoveType.Artillery:
-                return new ArtilleryPlayerMove(player);
+                return new ArtilleryPlayerMove(creator);
             case PlayerMoveType.TimeTravel:
-                return new TimeTravelPlayerMove(player);
+                return new TimeTravelPlayerMove(creator);
             default:
                 throw new NotImplementedException();
         }

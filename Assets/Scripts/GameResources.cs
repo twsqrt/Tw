@@ -32,7 +32,7 @@ public struct GameResources
         return $"Wood:{Wood} Coal:{Coal} Oil:{Oil}";
     }
 
-    public bool IsEnough(GameResources cost)
+    public bool IsEnoughTo(GameResources cost)
     {
         return Wood >= cost.Wood
             && Coal >= cost.Coal

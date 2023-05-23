@@ -3,22 +3,26 @@ using System;
 public class GameState
 {
     private Map _map;
+    private PlayerStates _playerStates;
     private int _time;
     public int Time => _time;
 
     //template solution
     public Map MapClone => _map.Clone();
+    public PlayerStates PlayerStatesClone => _playerStates.Clone();
 
-    public GameState(Map map)
+    public GameState(Map map, PlayerStates playersState)
     {
         _map = map;
-        _time = 1;
+        _playerStates = playersState;
+        _time = 0;
     }
 
     private GameState(GameState original)
     {
-        _map = original.MapClone;
-        _time = original.Time;
+        _map = original._map.Clone();
+        _time = original._time;
+        _playerStates = original._playerStates.Clone();
     }  
 
     public GameState Clone()
@@ -28,23 +32,28 @@ public class GameState
 
     public void ApplyMove(IMove move)
     {
-        move.Execute(_map);
+        move.Execute(_map, _playerStates);
     }
 
     public bool TryApplyMove(IMove move)
     {
-        return move.TryExecute(_map);
+        return move.TryExecute(_map, _playerStates);
     }
 
     public bool CanApplyPlayerMove(PlayerMove move)
     {
-        return move.Player.Resources.IsEnough(move.Cost) && move.IsValidMove(_map);
+        PlayerState creatorState = _playerStates.GetPlayerState(move.Creator);
+
+        return creatorState.Resources.IsEnoughTo(move.Cost) && move.IsValidMove(_map, _playerStates);
     }
 
     public void ApplyPlayerMove(PlayerMove move)
     {
         ApplyMove(move);
-        move.Player.Resources -= move.Cost;
+
+        PlayerState creatorState = _playerStates.GetPlayerState(move.Creator);
+        creatorState.Resources -= move.Cost;
+
         _time++;
     }
 

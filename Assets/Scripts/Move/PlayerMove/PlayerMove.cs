@@ -8,12 +8,11 @@ using UnityEngine;
 public abstract class PlayerMove : IMove
 {
     private MoveParameters _parameters;
-    protected PlayerState _player;
-    public PlayerState Player => _player;
+    public Player Creator {get; protected set;}
 
-    public PlayerMove(PlayerState player, MoveParameters parameters)
+    public PlayerMove(Player creator, MoveParameters parameters)
     {
-        _player = player;
+        Creator = creator;
         _parameters = parameters;
     }
     public bool IsParameterizedBy(MoveParameters parameter)
@@ -21,12 +20,9 @@ public abstract class PlayerMove : IMove
         return (_parameters & parameter) != 0;
     }
 
-    public abstract GameResources Cost
-    {
-        get;
-    }
+    public abstract GameResources Cost { get; }
 
-    public abstract void Execute(Map map); 
+    public abstract void Execute(Map map, PlayerStates playerStates); 
 
-    public abstract bool IsValidMove(Map map); 
+    public abstract bool IsValidMove(Map map, PlayerStates playerStates); 
 }

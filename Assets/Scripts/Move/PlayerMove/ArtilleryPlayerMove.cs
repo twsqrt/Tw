@@ -10,14 +10,14 @@ public class ArtilleryPlayerMove : PlayerMove, ICoordinateMove
     public Vector2Int Coordinates { get; set; }
     public override GameResources Cost => new GameResources(6, 7, 5);
 
-    public ArtilleryPlayerMove(PlayerState player) : base(player, MoveParameters.Coordinate) { }
+    public ArtilleryPlayerMove(Player creator) : base(creator, MoveParameters.Coordinate) { }
 
-    public override bool IsValidMove(Map map)
+    public override bool IsValidMove(Map map, PlayerStates playerStates)
     {
         MapTile tile = map[Coordinates];
-        return tile != null && tile.Building != null && tile.Building.Owner != _player;
+        return tile.Building != null && tile.Building.Owner != Creator;
     }
-    public override void Execute(Map map)
+    public override void Execute(Map map, PlayerStates playerStates)
     {
         map[Coordinates].Building = null;
     }

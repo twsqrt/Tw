@@ -19,7 +19,7 @@ public class PlayerMoveBuilder : MonoBehaviour
 
 
     //template solution
-    public PlayerState Player;
+    public Player Player;
 
     public void Init()
     {

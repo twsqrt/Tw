@@ -7,7 +7,7 @@ public class BuildingViewFactory : GameObjectFactory<Building, BuildingView>
     public override BuildingView Create(Building building)
     {
         BuildingView buildingView = Instantiate(building.Info.Prefab);
-        buildingView.Init(this, building.Owner.Player.Color);
+        buildingView.Init(this, building.Owner.Color);
         return buildingView;
     } 
 }
